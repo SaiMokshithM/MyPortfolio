@@ -1,0 +1,59 @@
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import About from './components/About'
+import Skills from './components/Skills'
+import Projects from './components/Projects'
+import Experience from './components/Experience'
+import Resume from './components/Resume'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
+import CursorEffect from './components/CursorEffect'
+import SmoothScroll from './components/SmoothScroll'
+import SectionReveal from './components/SectionReveal'
+
+function App() {
+  return (
+    <Router>
+      <div style={{ background: '#000', minHeight: '100vh', color: '#fff' }}>
+        {/* Premium smooth scroll engine */}
+        <SmoothScroll />
+        <CursorEffect />
+
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: '#111',
+              color: '#fff',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '2px',
+              fontSize: '13px',
+            },
+          }}
+        />
+
+        <Navbar />
+
+        <main>
+          {/* Hero has its own parallax — no wrapper needed */}
+          <Hero />
+
+          {/* Every other section gets the premium reveal + exit effect */}
+          <SectionReveal><About /></SectionReveal>
+          <SectionReveal><Skills /></SectionReveal>
+          <SectionReveal><Projects /></SectionReveal>
+          <SectionReveal><Experience /></SectionReveal>
+          <SectionReveal><Resume /></SectionReveal>
+          <SectionReveal><Contact /></SectionReveal>
+        </main>
+
+        <Footer />
+      </div>
+    </Router>
+  )
+}
+
+export default App

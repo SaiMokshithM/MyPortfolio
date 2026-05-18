@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --black: #000000;
+  --off-black: #0a0a0a;
+  --dark: #111111;
+  --card: #161616;
+  --border: rgba(255,255,255,0.1);
+  --border-subtle: rgba(255,255,255,0.06);
+  --white: #ffffff;
+  --off-white: #f0f0f0;
+  --gray: #888888;
+  --gray-light: #aaaaaa;
+  --accent: #ffffff;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; cursor: none; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.5;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  cursor: none;
+}
+
+a, button, [role="button"] { cursor: none !important; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+::selection { background: rgba(255,255,255,0.15); color: #fff; }
+
+/* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+.display-xl {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(4rem, 12vw, 11rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+
+.display-lg {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.display-md {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.body-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--gray-light);
+  font-weight: 400;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section {
+  padding: 100px 0;
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+/* ── LINES & DIVIDERS ─────────────────────────────────────────── */
+.h-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── SECTION HEADER (label top row) ──────────────────────────── */
+.section-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 28px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 2px;
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.25s ease;
+}
+.btn-outline:hover {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: var(--white);
+  color: var(--black);
+  border: 1px solid var(--white);
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn-solid:hover {
+  background: transparent;
+  color: var(--white);
+}
+
+/* ── TAG ────────────────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--gray-light);
+  text-transform: uppercase;
+}
+
+/* ── CARD ────────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+}
+
+/* ── INPUT ───────────────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 14px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+.input-field::placeholder { color: rgba(255,255,255,0.25); }
+.input-field:focus { border-bottom-color: var(--white); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .section { padding: 70px 0; }
+  .section-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────────── */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── PREMIUM SCROLL EFFECTS ─────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+/* Optimize animated elements */
+.section {
+  will-change: transform, opacity;
+}
+
+/* Clip-path reveal for headings */
+@keyframes revealUp {
+  from {
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0% 0 0 0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Glowing line separator */
+.glow-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+/* Scroll snap for full-page feel on desktop */
+@media (min-width: 1024px) {
+  .section:hover {
+    transition: background 0.4s ease;
+    background: rgba(255, 255, 255, 0.01);
+  }
+}
+
