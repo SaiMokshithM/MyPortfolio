@@ -12,20 +12,24 @@ const links = [
 const Navbar = () => {
   const [scrolled,   setScrolled]   = useState(false)
   const [menuOpen,   setMenuOpen]   = useState(false)
-  const [isMobile,   setIsMobile]   = useState(window.innerWidth < 768)
+  const [isMobile,   setIsMobile]   = useState(true) // default true — corrected after mount
   const [hoveredIdx, setHoveredIdx] = useState(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    const onResize = () => {
-      setIsMobile(window.innerWidth < 768)
-      if (window.innerWidth >= 768) setMenuOpen(false)
+    // Correct isMobile after mount (safe — window is available)
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+      if (!mobile) setMenuOpen(false)
     }
+    checkMobile() // run once immediately after mount
+
+    const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
-    window.addEventListener('resize', onResize)
+    window.addEventListener('resize', checkMobile)
     return () => {
       window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onResize)
+      window.removeEventListener('resize', checkMobile)
     }
   }, [])
 
@@ -59,9 +63,11 @@ const Navbar = () => {
             : '1px solid transparent',
           background: scrolled
             ? 'rgba(0,0,0,0.95)'
-            : menuOpen ? 'rgba(0,0,0,0.98)' : 'transparent',
+            : menuOpen
+              ? 'rgba(0,0,0,0.98)'
+              : 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)',
           backdropFilter: (scrolled || menuOpen) ? 'blur(20px)' : 'none',
-          transition: 'all 0.4s ease',
+          transition: 'background 0.4s ease, border-color 0.4s ease',
           padding: isMobile ? '0 20px' : '0 40px',
         }}
       >
