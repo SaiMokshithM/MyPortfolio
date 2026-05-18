@@ -20,6 +20,9 @@
   --section-pad: clamp(56px, 8vw, 100px);
   --container-pad: clamp(20px, 5vw, 40px);
   --nav-height: 64px;
+
+  /* Hero specific */
+  --hero-photo-glow: rgba(255,255,255,0.06);
 }
 
 /* ── RESET ───────────────────────────────────────────────────── */
@@ -290,6 +293,99 @@ button, a, [role="button"], input, textarea, select {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
+}
+
+@keyframes heroPhotoReveal {
+  from { clip-path: inset(0 100% 0 0); opacity: 0; }
+  to   { clip-path: inset(0 0% 0 0);   opacity: 1; }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0);   opacity: 0.4; }
+  50%      { transform: translateY(6px); opacity: 1;   }
+}
+
+/* ── HERO PHOTO ──────────────────────────────────────────────── */
+.hero-photo-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 3 / 4;
+  margin-left: auto;
+  overflow: hidden;
+}
+
+.hero-photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid rgba(255,255,255,0.1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-photo-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 10%;
+  width: 80%;
+  height: 80px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 70%);
+  z-index: 0;
+  filter: blur(20px);
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(20%) contrast(1.08) brightness(0.92);
+  display: block;
+  animation: heroPhotoReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+}
+
+/* Diagonal overlay — film noir vignette */
+.hero-photo-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,0.35) 0%,
+    transparent 45%,
+    rgba(0,0,0,0.2) 100%
+  );
+  z-index: 1;
+}
+
+/* ── SCROLL INDICATOR ────────────────────────────────────────── */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.4;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.scroll-indicator span {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  writing-mode: vertical-rl;
+}
+
+.scroll-indicator svg {
+  opacity: 0.6;
 }
 
 @keyframes revealUp {

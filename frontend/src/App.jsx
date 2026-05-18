@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
+import StatsBar from './components/StatsBar'
 import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Resume from './components/Resume'
@@ -43,6 +44,7 @@ function App() {
 
           {/* Every other section gets the premium reveal + exit effect */}
           <SectionReveal><About /></SectionReveal>
+          <StatsBar />
           <SectionReveal><Skills /></SectionReveal>
           <SectionReveal><Projects /></SectionReveal>
           <SectionReveal><Experience /></SectionReveal>

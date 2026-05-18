@@ -8,22 +8,22 @@ const defaultProjects = [
   {
     _id: 'lensbysai',
     title: 'LensBySai',
-    subtitle: 'Photography Portfolio & Booking Website',
+    subtitle: 'Photography Portfolio & Booking',
     category: 'Full-Stack',
     year: '2025',
-    description: 'A premium photography portfolio website showcasing photography work with a seamless gallery experience. Built with React + Vite on the frontend and Supabase for the backend — handling image storage, real-time database, and authentication. Currently live at lensbysai.in.',
-    tags: ['React', 'Vite', 'Supabase', 'PostgreSQL', 'Storage', 'Real-time'],
+    description: 'Premium photography portfolio with seamless gallery experience. React + Vite frontend, Supabase backend — image storage, real-time DB, and auth.',
+    tags: ['React', 'Vite', 'Supabase', 'PostgreSQL'],
     github: 'https://github.com/SaiMokshithM/',
     live: 'https://lensbysai.in',
   },
   {
     _id: 'participate-plus',
     title: 'Participate+',
-    subtitle: 'Student Extracurricular Activity Platform',
+    subtitle: 'Student Activity Platform',
     category: 'Full-Stack',
     year: '2024',
-    description: 'A full-stack web platform built for KL University students to discover, register, and manage extracurricular activities and campus events. Features include student registration, activity listings, admin management panel, and participation tracking.',
-    tags: ['React', 'Vite', 'Spring Boot', 'MySQL', 'REST API', 'Java'],
+    description: 'Full-stack platform for KL University students to discover, register, and manage extracurricular activities with admin panel and participation tracking.',
+    tags: ['React', 'Spring Boot', 'MySQL', 'Java'],
     github: 'https://github.com/SaiMokshithM/',
     live: null,
   },
@@ -33,19 +33,30 @@ const defaultProjects = [
     subtitle: 'Donation Management Platform',
     category: 'Full-Stack',
     year: '2024',
-    description: 'A full-stack web application to support the donation and distribution of essential items during emergencies. Features role-based modules for Admin, Donor, Recipient, and Logistics Coordinator.',
-    tags: ['React', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
+    description: 'Role-based web app supporting donation and distribution during emergencies — modules for Admin, Donor, Recipient, and Logistics.',
+    tags: ['React', 'Node.js', 'MongoDB', 'REST API'],
     github: 'https://github.com/SaiMokshithM/',
     live: null,
   },
   {
+    _id: 'drawsense',
+    title: 'DrawSense',
+    subtitle: 'Hand Gesture Drawing App',
+    category: 'Frontend',
+    year: '2025',
+    description: 'Interactive drawing app using hand gesture tracking — draw on a digital canvas without touching the screen, built for low-latency gesture recognition.',
+    tags: ['React', 'Canvas', 'MediaPipe', 'Vite'],
+    github: 'https://github.com/SaiMokshithM/',
+    live: 'https://drawsense-beta.vercel.app',
+  },
+  {
     _id: 'attcalbot',
     title: 'AttCalBot',
-    subtitle: 'Attendance Calculator Chatbot',
-    category: 'AI/ML',
+    subtitle: 'AI Attendance Chatbot',
+    category: 'AI / ML',
     year: '2025',
-    description: 'An AI-powered attendance calculator chatbot built using a Retrieval-Augmented Generation (RAG) pipeline. Integrates semantic search with ChromaDB and REST APIs with FastAPI for chat interactions.',
-    tags: ['Python', 'FastAPI', 'LangChain', 'ChromaDB', 'Ollama', 'RAG'],
+    description: 'AI-powered attendance calculator using RAG pipeline. Semantic search via ChromaDB, REST API via FastAPI, conversational interface for students.',
+    tags: ['Python', 'FastAPI', 'LangChain', 'ChromaDB'],
     github: 'https://github.com/SaiMokshithM/',
     live: null,
   },
@@ -53,379 +64,396 @@ const defaultProjects = [
     _id: 'hippocria',
     title: 'Hippocria',
     subtitle: 'Healthcare Assistance Chatbot',
-    category: 'AI/ML',
+    category: 'AI / ML',
     year: '2025',
-    description: 'An AI-powered healthcare chatbot built using a Retrieval-Augmented Generation (RAG) pipeline. Integrates semantic search with ChromaDB and FastAPI. Provides users with accessible medical information and basic symptom guidance.',
-    tags: ['Python', 'FastAPI', 'LangChain', 'ChromaDB', 'Ollama', 'RAG'],
+    description: 'AI healthcare chatbot using RAG pipeline with ChromaDB and FastAPI. Provides accessible medical information and basic symptom guidance.',
+    tags: ['Python', 'FastAPI', 'LangChain', 'ChromaDB'],
     github: 'https://github.com/SaiMokshithM/',
     live: null,
-  },
-  {
-    _id: 'techcorp',
-    title: 'TechCorp',
-    subtitle: 'HR Assistant Chatbot',
-    category: 'AI/ML',
-    year: '2025',
-    description: 'An AI-powered HR Assistant chatbot built using a Retrieval-Augmented Generation (RAG) pipeline. Integrates semantic search with ChromaDB and REST APIs with FastAPI for HR policy guidance.',
-    tags: ['Python', 'FastAPI', 'LangChain', 'ChromaDB', 'Ollama', 'RAG'],
-    github: 'https://github.com/SaiMokshithM/',
-    live: null,
-  },
-  {
-    _id: 'drawsense',
-    title: 'DrawSense',
-    subtitle: 'Hand Gesture Drawing Website',
-    category: 'Frontend',
-    year: '2025',
-    description: 'An interactive drawing web application that tracks hand gestures to allow users to draw on a digital canvas without touching the screen. Built entirely on the frontend for low-latency gesture recognition.',
-    tags: ['React', 'Vite', 'Canvas', 'MediaPipe', 'Frontend'],
-    github: 'https://github.com/SaiMokshithM/',
-    live: 'https://drawsense-beta.vercel.app',
   },
   {
     _id: 'openopsenv',
     title: 'OpenOpsEnv',
-    subtitle: 'AI Agent Code Review Environment',
-    category: 'AI/ML',
+    subtitle: 'AI Code Review Agent',
+    category: 'AI / ML',
     year: '2025',
-    description: 'A real-world AI agent benchmarking environment that simulates a software engineering workflow where an AI agent reviews Pull Requests — finding bugs, identifying security vulnerabilities, classifying severity, and suggesting fixes.',
-    tags: ['Python', 'OpenEnv', 'AI Agents', 'Hugging Face', 'Code Review', 'RL'],
+    description: 'AI agent environment simulating software engineering workflow — finds bugs, identifies vulnerabilities, classifies severity and suggests fixes.',
+    tags: ['Python', 'AI Agents', 'Hugging Face', 'RL'],
     github: 'https://github.com/SaiMokshithM/',
     live: 'https://huggingface.co/spaces/saimokshith/OpenOpsEnv',
   },
   {
     _id: 'taskmanagementapp',
     title: 'TaskManagementApp',
-    subtitle: 'Enterprise Task Management Platform',
+    subtitle: 'Enterprise Task Platform',
     category: 'Full-Stack',
     year: '2025',
-    description: 'A full-stack enterprise task management application with secure JWT authentication, role-based access control, and real-time task tracking. Built with React + Vite and Spring Boot, backed by MySQL.',
-    tags: ['React', 'Vite', 'Spring Boot', 'MySQL', 'JWT', 'REST API', 'Java'],
+    description: 'Enterprise task management with JWT auth, role-based access control, and real-time tracking. React + Vite + Spring Boot + MySQL.',
+    tags: ['React', 'Spring Boot', 'MySQL', 'JWT'],
     github: 'https://github.com/SaiMokshithM/',
     live: null,
   },
 ]
 
-const categories = ['All', 'Full-Stack', 'Frontend', 'Backend', 'AI/ML']
+const filterCategories = ['All', 'Full-Stack', 'Frontend', 'AI / ML']
 
-/* ── Link button shared style ── */
-const linkStyle = {
-  fontSize: 11,
-  color: 'rgba(255,255,255,0.4)',
-  letterSpacing: '0.08em',
-  textTransform: 'uppercase',
-  textDecoration: 'none',
-  transition: 'color 0.2s',
-  padding: '6px 0',          /* larger touch target */
-  display: 'inline-block',
+/* ── Single project row ─────────────────────────────────────── */
+const ProjectRow = ({ project, index, inView, isMobile }) => {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: 'relative',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        overflow: 'hidden',
+        cursor: 'default',
+      }}
+    >
+      {/* Hover fill — left to right sweep */}
+      <motion.div
+        initial={false}
+        animate={{ scaleX: hovered ? 1 : 0 }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: 'absolute', inset: 0,
+          background: 'rgba(255,255,255,0.025)',
+          transformOrigin: 'left',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div style={{
+        position: 'relative', zIndex: 1,
+        padding: isMobile ? '28px 0' : '40px 0',
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '60px 1fr auto',
+        gap: isMobile ? 14 : 0,
+        alignItems: 'center',
+      }}>
+
+        {/* Index number */}
+        <motion.span
+          animate={{ opacity: hovered ? 1 : 0.15 }}
+          transition={{ duration: 0.35 }}
+          style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: isMobile ? 14 : 11,
+            fontWeight: isMobile ? 600 : 500,
+            color: '#fff',
+            letterSpacing: isMobile ? '-0.01em' : '0.12em',
+            lineHeight: 1,
+          }}
+        >
+          {String(index + 1).padStart(2, '0')}
+        </motion.span>
+
+        {/* Center — title block */}
+        <div style={{ paddingRight: isMobile ? 0 : 60 }}>
+
+          {/* Title row */}
+          <div style={{
+            display: 'flex',
+            alignItems: isMobile ? 'flex-start' : 'baseline',
+            gap: isMobile ? 10 : 18,
+            marginBottom: 8,
+            flexDirection: isMobile ? 'column' : 'row',
+          }}>
+            <motion.h3
+              animate={{ x: hovered && !isMobile ? 6 : 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontSize: isMobile ? 'clamp(1.5rem, 6vw, 2rem)' : 'clamp(1.8rem, 3.2vw, 3rem)',
+                fontWeight: 700,
+                letterSpacing: '-0.03em',
+                color: hovered ? '#fff' : 'rgba(255,255,255,0.88)',
+                lineHeight: 1,
+                transition: 'color 0.3s',
+              }}
+            >
+              {project.title}
+            </motion.h3>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, paddingBottom: isMobile ? 0 : 4 }}>
+              <span style={{
+                fontSize: 11,
+                fontFamily: 'Inter, sans-serif',
+                color: 'rgba(255,255,255,0.3)',
+                fontStyle: 'italic',
+                letterSpacing: '0.01em',
+              }}>
+                {project.subtitle}
+              </span>
+              {!isMobile && (
+                <span style={{
+                  fontSize: 10,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: hovered ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.3)',
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 500,
+                  border: `1px solid ${hovered ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.15)'}`,
+                  padding: '5px 12px',
+                  borderRadius: 2,
+                  transition: 'color 0.3s, border-color 0.3s',
+                  flexShrink: 0,
+                }}>
+                  {project.category}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Description — appears on hover */}
+          <AnimatePresence>
+            {hovered && !isMobile && (
+              <motion.p
+                initial={{ opacity: 0, height: 0, y: -4 }}
+                animate={{ opacity: 1, height: 'auto', y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -4 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 13, lineHeight: 1.75,
+                  color: 'rgba(255,255,255,0.4)',
+                  maxWidth: 520, marginBottom: 14,
+                  overflow: 'hidden',
+                }}
+              >
+                {project.description}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          {isMobile && (
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.38)', lineHeight: 1.75, fontFamily: 'Inter, sans-serif', marginBottom: 12 }}>
+              {project.description}
+            </p>
+          )}
+
+          {/* Tags */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px' }}>
+            {project.tags.map(t => (
+              <span key={t} style={{
+                fontSize: 10, fontFamily: 'Inter, sans-serif',
+                color: hovered ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.2)',
+                letterSpacing: '0.08em', textTransform: 'uppercase',
+                transition: 'color 0.3s',
+              }}>{t}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Right — year + links */}
+        <div style={{
+          display: 'flex',
+          flexDirection: isMobile ? 'row' : 'column',
+          gap: isMobile ? 20 : 12,
+          alignItems: isMobile ? 'center' : 'flex-end',
+          flexShrink: 0,
+        }}>
+          <span style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 11,
+            color: 'rgba(255,255,255,0.2)',
+            letterSpacing: '0.08em',
+          }}>
+            {project.year}
+          </span>
+          {project.github && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer"
+              onClick={e => e.stopPropagation()}
+              style={{
+                fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase',
+                color: hovered ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.18)',
+                textDecoration: 'none', fontFamily: 'Inter, sans-serif',
+                transition: 'color 0.2s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+              onMouseLeave={e => e.currentTarget.style.color = hovered ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.18)'}
+            >
+              GitHub ↗
+            </a>
+          )}
+          {project.live && (
+            <a href={project.live} target="_blank" rel="noopener noreferrer"
+              onClick={e => e.stopPropagation()}
+              style={{
+                fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase',
+                color: hovered ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.18)',
+                textDecoration: 'none', fontFamily: 'Inter, sans-serif',
+                transition: 'color 0.2s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+              onMouseLeave={e => e.currentTarget.style.color = hovered ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.18)'}
+            >
+              Live ↗
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  )
 }
 
+/* ── Main ────────────────────────────────────────────────────── */
 const Projects = () => {
   const [projects, setProjects] = useState(defaultProjects)
   const [filter, setFilter] = useState('All')
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 })
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.04 })
   const isMobile = useIsMobile()
 
   useEffect(() => {
     axios.get('/api/projects')
-      .then(res => {
-        if (res.data?.data?.length) setProjects([...defaultProjects, ...res.data.data])
-      })
+      .then(res => { if (res.data?.data?.length) setProjects([...defaultProjects, ...res.data.data]) })
       .catch(() => {})
   }, [])
 
   const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter)
 
   return (
-    <section id="projects" className="section" ref={ref}>
-      <div className="container">
-        {/* Meta */}
-        <div className="section-meta">
-          <span className="label">03 — Selected Work</span>
-          <span className="label" style={{ color: 'rgba(255,255,255,0.25)' }}>Projects &amp; Case Studies</span>
-        </div>
+    <section
+      id="projects"
+      ref={ref}
+      style={{
+        background: '#000',
+        position: 'relative',
+        overflow: 'hidden',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        padding: `clamp(80px, 11vw, 120px) 0 clamp(60px, 8vw, 100px)`,
+      }}
+    >
+      {/* Grain */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E")`,
+        backgroundSize: '200px 200px',
+      }} />
+
+      {/* Ghost BG — top, behind heading */}
+      <motion.span
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: 'absolute', top: '0%', right: '-2%',
+          fontFamily: 'Space Grotesk, sans-serif',
+          fontSize: isMobile ? '45vw' : '28vw',
+          fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 0.85,
+          userSelect: 'none', pointerEvents: 'none', zIndex: 0,
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.025) 50%, transparent 100%)',
+          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+        }}
+      >
+        Work
+      </motion.span>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Heading */}
-        <motion.h2
-          className="display-lg"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{ marginBottom: 32 }}
-        >
-          My Work
-        </motion.h2>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+          gap: isMobile ? 20 : 0, alignItems: 'flex-end',
+          marginBottom: isMobile ? 40 : 64,
+        }}>
+          <div>
+            <motion.div
+              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}
+            >
+              <div style={{ width: 20, height: 1, background: 'rgba(255,255,255,0.3)' }} />
+              <span className="label" style={{ color: 'rgba(255,255,255,0.4)', letterSpacing: '0.2em' }}>03 — Selected Work</span>
+            </motion.div>
+            <div style={{ overflow: 'hidden' }}>
+              <motion.h2
+                initial={{ y: '105%' }} animate={inView ? { y: '0%' } : {}}
+                transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontSize: isMobile ? 'clamp(2.5rem, 12vw, 4rem)' : 'clamp(3rem, 6vw, 6rem)',
+                  fontWeight: 700, letterSpacing: '-0.035em', color: '#fff', lineHeight: 0.9, margin: 0,
+                }}
+              >
+                My Work
+              </motion.h2>
+            </div>
+          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.35)', maxWidth: 360, marginLeft: isMobile ? 0 : 'auto' }}
+          >
+            Full-stack platforms, AI-powered tools, and frontend experiments — built to solve real problems.
+          </motion.p>
+        </div>
 
-        {/* Category filter — horizontal scroll on mobile */}
+        {/* Filter */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          style={{
-            display: 'flex',
-            gap: 8,
-            marginBottom: 32,
-            overflowX: 'auto',
-            WebkitOverflowScrolling: 'touch',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            paddingBottom: 2,
-          }}
+          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: isMobile ? 32 : 52 }}
         >
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              style={{
-                flexShrink: 0,
-                background: filter === cat ? '#fff' : 'transparent',
-                border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 2,
-                padding: '8px 16px',
-                fontSize: 11,
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: filter === cat ? '#000' : 'rgba(255,255,255,0.4)',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                fontFamily: 'Inter, sans-serif',
-                minHeight: 40,
-              }}
+          {filterCategories.map(cat => (
+            <button key={cat} onClick={() => setFilter(cat)} style={{
+              padding: '9px 20px',
+              border: filter === cat ? '1px solid #fff' : '1px solid rgba(255,255,255,0.12)',
+              borderRadius: 2, background: filter === cat ? '#fff' : 'transparent',
+              color: filter === cat ? '#000' : 'rgba(255,255,255,0.45)',
+              fontFamily: 'Inter, sans-serif', fontSize: 11,
+              fontWeight: filter === cat ? 600 : 400,
+              letterSpacing: '0.1em', textTransform: 'uppercase',
+              cursor: 'pointer', transition: 'all 0.2s',
+            }}
+              onMouseEnter={e => { if (filter !== cat) { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; e.currentTarget.style.color = '#fff' } }}
+              onMouseLeave={e => { if (filter !== cat) { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'rgba(255,255,255,0.45)' } }}
             >
               {cat}
             </button>
           ))}
         </motion.div>
 
-        {/* Column headers — desktop only */}
-        {!isMobile && (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '56px 1fr 110px',
-            gap: 32,
-            padding: '12px 0',
-            borderTop: '1px solid rgba(255,255,255,0.08)',
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-          }}>
-            <span className="label">#</span>
-            <span className="label">Project</span>
-            <span className="label" style={{ textAlign: 'right' }}>Links</span>
-          </div>
-        )}
-
-        {/* Mobile: top border only */}
-        {isMobile && (
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', marginBottom: 0 }} />
-        )}
-
-        {/* Project rows */}
+        {/* Rows */}
         <AnimatePresence mode="wait">
           <motion.div
             key={filter}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
           >
-            {filtered.length === 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                style={{ padding: '60px 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}
-              >
-                <p className="label" style={{ marginBottom: 12 }}>No projects in this category</p>
-                <p className="body-text" style={{ maxWidth: 400 }}>
-                  Select a different category above to browse other projects.
-                </p>
-              </motion.div>
-            )}
-
-            {filtered.map((p, i) =>
-              isMobile ? (
-                /* ── MOBILE CARD ── */
-                <motion.div
-                  key={p._id}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: i * 0.06 }}
-                  style={{
-                    padding: '24px 0',
-                    borderBottom: '1px solid rgba(255,255,255,0.06)',
-                  }}
-                >
-                  {/* Number + Title + Year */}
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 6, flexWrap: 'wrap' }}>
-                    <span className="label" style={{ color: 'rgba(255,255,255,0.2)', flexShrink: 0 }}>
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <h3 style={{
-                      fontSize: 17,
-                      fontWeight: 600,
-                      fontFamily: 'Space Grotesk, sans-serif',
-                      letterSpacing: '-0.01em',
-                      color: '#fff',
-                      lineHeight: 1.2,
-                    }}>
-                      {p.title}
-                    </h3>
-                    {p.year && (
-                      <span className="label" style={{ color: 'rgba(255,255,255,0.25)', flexShrink: 0 }}>
-                        {p.year}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Subtitle */}
-                  {p.subtitle && (
-                    <p style={{
-                      fontSize: 11,
-                      color: 'rgba(255,255,255,0.35)',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      marginBottom: 10,
-                    }}>
-                      {p.subtitle}
-                    </p>
-                  )}
-
-                  {/* Description */}
-                  <p className="body-text" style={{ marginBottom: 14, fontSize: 13 }}>
-                    {p.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
-                    {(p.tags || []).map(tag => <span key={tag} className="tag">{tag}</span>)}
-                  </div>
-
-                  {/* Links — inline with larger touch targets */}
-                  {(p.github || p.live) && (
-                    <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
-                      {p.github && (
-                        <a
-                          href={p.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={linkStyle}
-                          onTouchStart={e => e.currentTarget.style.color = '#fff'}
-                          onTouchEnd={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
-                        >
-                          GitHub ↗
-                        </a>
-                      )}
-                      {p.live && (
-                        <a
-                          href={p.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={linkStyle}
-                          onTouchStart={e => e.currentTarget.style.color = '#fff'}
-                          onTouchEnd={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
-                        >
-                          Live ↗
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </motion.div>
-              ) : (
-                /* ── DESKTOP TABLE ROW ── */
-                <motion.div
-                  key={p._id}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.08 }}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '56px 1fr 110px',
-                    gap: 32,
-                    padding: '32px 0',
-                    borderBottom: '1px solid rgba(255,255,255,0.06)',
-                    alignItems: 'start',
-                  }}
-                >
-                  <span className="label" style={{ color: 'rgba(255,255,255,0.2)', paddingTop: 4 }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 6, flexWrap: 'wrap' }}>
-                      <h3 style={{
-                        fontSize: 18,
-                        fontWeight: 600,
-                        fontFamily: 'Space Grotesk, sans-serif',
-                        letterSpacing: '-0.01em',
-                        color: '#fff',
-                      }}>
-                        {p.title}
-                      </h3>
-                      {p.year && <span className="label" style={{ color: 'rgba(255,255,255,0.25)' }}>{p.year}</span>}
-                    </div>
-                    {p.subtitle && (
-                      <p style={{
-                        fontSize: 11,
-                        color: 'rgba(255,255,255,0.35)',
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                        marginBottom: 10,
-                      }}>
-                        {p.subtitle}
-                      </p>
-                    )}
-                    <p className="body-text" style={{ maxWidth: 640, marginBottom: 14, fontSize: 13 }}>
-                      {p.description}
-                    </p>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                      {(p.tags || []).map(tag => <span key={tag} className="tag">{tag}</span>)}
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14, paddingTop: 4, alignItems: 'flex-end' }}>
-                    {p.github && (
-                      <a
-                        href={p.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ ...linkStyle, padding: 0 }}
-                        onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                        onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
-                      >
-                        GitHub ↗
-                      </a>
-                    )}
-                    {p.live && (
-                      <a
-                        href={p.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ ...linkStyle, padding: 0 }}
-                        onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                        onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
-                      >
-                        Live ↗
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
-              )
-            )}
+            {filtered.map((p, i) => (
+              <ProjectRow key={p._id} project={p} index={i} inView={inView} isMobile={isMobile} />
+            ))}
           </motion.div>
         </AnimatePresence>
 
+        <motion.div
+          initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.2, delay: 0.8 }}
+          style={{ transformOrigin: 'left', height: 1, background: 'rgba(255,255,255,0.07)' }}
+        />
+
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          style={{ marginTop: 48 }}
+          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.7, delay: 1.0 }}
+          style={{ marginTop: isMobile ? 40 : 56, display: 'flex', alignItems: 'center', gap: 20 }}
         >
-          <a
-            href="https://github.com/SaiMokshithM/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline"
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.07)' }} />
+          <a href="https://github.com/SaiMokshithM/" target="_blank" rel="noopener noreferrer"
+            style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', textDecoration: 'none', transition: 'color 0.2s', flexShrink: 0 }}
+            onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}
           >
-            View GitHub Profile ↗
+            All Projects on GitHub ↗
           </a>
+          <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.07)' }} />
         </motion.div>
       </div>
     </section>

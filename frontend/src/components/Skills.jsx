@@ -1,191 +1,347 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useIsMobile from '../hooks/useIsMobile'
 
-const skillGroups = [
+const categories = [
   {
-    category: 'Frontend Engineering',
-    skills: [
-      { name: 'React.js (Hooks, Router)', years: '1 year', level: 78 },
-      { name: 'HTML5 / CSS3', years: '1 year', level: 85 },
-      { name: 'JavaScript (ES6+)', years: '1 year', level: 75 },
-      { name: 'Vite', years: '1 year', level: 72 },
-      { name: 'Tailwind CSS', years: '1 year', level: 70 },
-    ],
+    num: '01',
+    label: 'Frontend',
+    headline: 'What users see & interact with',
+    skills: ['React.js', 'JavaScript ES6+', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite', 'Framer Motion'],
   },
   {
-    category: 'Backend Engineering',
-    skills: [
-      { name: 'Spring Boot', years: '1 year', level: 75 },
-      { name: 'Hibernate ORM', years: '1 year', level: 65 },
-      { name: 'Spring Security', years: '< 1 year', level: 55 },
-      { name: 'Spring Data JPA', years: '1 year', level: 65 },
-      { name: 'RESTful APIs', years: '1 year', level: 78 },
-      { name: 'Node.js / Express.js', years: '< 1 year', level: 55 },
-      { name: 'FastAPI (Python)', years: '< 1 year', level: 50 },
-    ],
+    num: '02',
+    label: 'Backend',
+    headline: 'The engine powering the product',
+    skills: ['Spring Boot', 'Node.js', 'Express.js', 'RESTful APIs', 'Spring Security', 'Hibernate ORM'],
   },
   {
-    category: 'Database & Cloud',
-    skills: [
-      { name: 'MySQL', years: '1 year', level: 72 },
-      { name: 'MongoDB', years: '< 1 year', level: 55 },
-      { name: 'ChromaDB', years: '< 1 year', level: 45 },
-    ],
+    num: '03',
+    label: 'Database',
+    headline: 'Where structured truth lives',
+    skills: ['MySQL', 'MongoDB', 'Spring Data JPA', 'ChromaDB'],
   },
   {
-    category: 'Languages',
-    skills: [
-      { name: 'Java', years: '1 year', level: 80 },
-      { name: 'C', years: '1 year', level: 70 },
-      { name: 'JavaScript', years: '1 year', level: 75 },
-      { name: 'SQL', years: '1 year', level: 72 },
-      { name: 'Python (Pandas, NumPy)', years: '< 1 year', level: 55 },
-    ],
+    num: '04',
+    label: 'Languages',
+    headline: 'How I communicate with machines',
+    skills: ['Java', 'JavaScript', 'Python', 'SQL', 'C'],
   },
   {
-    category: 'Tools & Practices',
-    skills: [
-      { name: 'Git / GitHub', years: '1 year', level: 80 },
-      { name: 'Maven', years: '1 year', level: 65 },
-      { name: 'n8n', years: '< 1 year', level: 45 },
-      { name: 'Swagger / OpenAPI', years: '< 1 year', level: 50 },
-      { name: 'Postman', years: '1 year', level: 72 },
-    ],
+    num: '05',
+    label: 'Tools & DevOps',
+    headline: 'The craft, sharpened daily',
+    skills: ['Git / GitHub', 'Postman', 'Maven', 'Swagger', 'IntelliJ IDEA', 'n8n'],
   },
 ]
 
-const SkillRow = ({ skill, inView, delay, isMobile }) => (
-  <motion.div
-    initial={{ opacity: 0, x: -10 }}
-    animate={inView ? { opacity: 1, x: 0 } : {}}
-    transition={{ duration: 0.5, delay }}
-    style={{
-      display: 'grid', gridTemplateColumns: isMobile ? '1fr auto' : '1fr 80px 120px',
-      alignItems: 'center', gap: isMobile ? 12 : 20,
-      padding: '14px 0',
-      borderBottom: '1px solid rgba(255,255,255,0.05)',
-    }}
-  >
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', fontWeight: 400 }}>{skill.name}</span>
-      {isMobile && <span className="label" style={{ color: 'rgba(255,255,255,0.25)', marginTop: 4 }}>{skill.years}</span>}
-    </div>
-    {!isMobile && <span className="label" style={{ color: 'rgba(255,255,255,0.25)', textAlign: 'right' }}>{skill.years}</span>}
-    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-      <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.08)', position: 'relative' }}>
-        <motion.div
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${skill.level}%` } : {}}
-          transition={{ duration: 1, delay: delay + 0.2, ease: [0.16, 1, 0.3, 1] }}
-          style={{ position: 'absolute', top: 0, left: 0, height: '100%', background: '#fff' }}
-        />
-      </div>
-      <span className="label" style={{ color: 'rgba(255,255,255,0.3)', minWidth: 32, textAlign: 'right' }}>{skill.level}%</span>
-    </div>
-  </motion.div>
-)
+const concepts = [
+  'OOP', 'Microservices', 'JWT Auth', 'RBAC',
+  'RAG Pipeline', 'REST Design', 'MVC', 'DSA', 'DBMS',
+]
 
-const Skills = () => {
-  const [activeTab, setActiveTab] = useState(0)
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 })
-  const isMobile = useIsMobile()
-
-  const current = skillGroups[activeTab]
+const CategoryRow = ({ cat, index, inView, isMobile }) => {
+  const [hovered, setHovered] = useState(false)
 
   return (
-    <section id="skills" className="section" ref={ref}>
-      <div className="container">
-        {/* Meta */}
-        <div className="section-meta">
-          <span className="label">02 — Technical Skills</span>
-          <span className="label" style={{ color: 'rgba(255,255,255,0.25)' }}>Technologies & Tools</span>
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: 0.3 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: 'relative',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        padding: isMobile ? '28px 0' : '36px 0',
+        cursor: 'default',
+        transition: 'background 0.3s',
+        background: hovered ? 'rgba(255,255,255,0.02)' : 'transparent',
+      }}
+    >
+      {/* Left accent line on hover */}
+      <motion.div
+        animate={{ scaleY: hovered ? 1 : 0 }}
+        transition={{ duration: 0.25 }}
+        style={{
+          position: 'absolute',
+          left: -32,
+          top: 0, bottom: 0,
+          width: 1,
+          background: '#fff',
+          transformOrigin: 'top',
+        }}
+      />
+
+      {isMobile ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 14 }}>
+            <span style={{
+              fontFamily: 'Inter, sans-serif', fontSize: 10,
+              color: 'rgba(255,255,255,0.2)', letterSpacing: '0.12em',
+            }}>{cat.num}</span>
+            <div>
+              <p style={{
+                fontFamily: 'Space Grotesk, sans-serif', fontSize: 22,
+                fontWeight: 700, letterSpacing: '-0.025em',
+                color: '#fff', marginBottom: 4,
+              }}>{cat.label}</p>
+              <p style={{
+                fontFamily: 'Inter, sans-serif', fontSize: 12,
+                color: 'rgba(255,255,255,0.28)', fontStyle: 'italic',
+              }}>{cat.headline}</p>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 10px' }}>
+            {cat.skills.map(skill => (
+              <span key={skill} style={{
+                fontFamily: 'Inter, sans-serif', fontSize: 12,
+                color: 'rgba(255,255,255,0.6)',
+                padding: '5px 12px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 2,
+              }}>{skill}</span>
+            ))}
+          </div>
         </div>
-
-        {/* Heading */}
-        <motion.h2
-          className="display-lg"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{ marginBottom: 40 }}
-        >
-          My Stack
-        </motion.h2>
-
-        {/* Tab nav */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          style={{ 
-            display: 'flex', gap: 0, 
-            borderBottom: '1px solid rgba(255,255,255,0.08)', marginBottom: 0,
-            overflowX: 'auto', WebkitOverflowScrolling: 'touch',
-            scrollbarWidth: 'none', msOverflowStyle: 'none'
-          }}
-        >
-          {skillGroups.map((g, i) => (
-            <button
-              key={g.category}
-              onClick={() => setActiveTab(i)}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                padding: '14px 0', marginRight: 36,
-                fontSize: 11, fontWeight: 500, letterSpacing: '0.08em',
-                textTransform: 'uppercase', fontFamily: 'Inter, sans-serif',
-                color: activeTab === i ? '#fff' : 'rgba(255,255,255,0.25)',
-                borderBottom: activeTab === i ? '1px solid #fff' : '1px solid transparent',
-                marginBottom: -1,
-                transition: 'all 0.2s',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {g.category}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Column header */}
+      ) : (
         <div style={{
-          display: 'grid', gridTemplateColumns: isMobile ? '1fr auto' : '1fr 80px 120px',
-          gap: isMobile ? 12 : 20, padding: '14px 0',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          display: 'grid',
+          gridTemplateColumns: '64px 260px 1fr',
+          alignItems: 'center',
+          gap: 0,
         }}>
-          <span className="label">Technology</span>
-          {!isMobile && <span className="label" style={{ textAlign: 'right' }}>Experience</span>}
-          <span className="label" style={{ textAlign: 'right' }}>Proficiency</span>
+          {/* Number */}
+          <motion.span
+            animate={{ opacity: hovered ? 1 : 0.15 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontSize: 38,
+              fontWeight: 800,
+              color: '#fff',
+              letterSpacing: '-0.04em',
+              lineHeight: 1,
+            }}
+          >
+            {cat.num}
+          </motion.span>
+
+          {/* Category + headline */}
+          <motion.div
+            animate={{ x: hovered ? 8 : 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{ paddingRight: 40 }}
+          >
+            <p style={{
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontSize: 'clamp(1.3rem, 2.5vw, 2rem)',
+              fontWeight: 700,
+              letterSpacing: '-0.025em',
+              color: hovered ? '#fff' : 'rgba(255,255,255,0.85)',
+              lineHeight: 1.1,
+              marginBottom: 6,
+              transition: 'color 0.3s',
+            }}>{cat.label}</p>
+            <p style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 12,
+              color: 'rgba(255,255,255,0.28)',
+              fontStyle: 'italic',
+            }}>{cat.headline}</p>
+          </motion.div>
+
+          {/* Skills — left-aligned, wrap naturally */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '8px 10px',
+            alignItems: 'center',
+          }}>
+            {cat.skills.map((skill, i) => (
+              <motion.span
+                key={skill}
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 + i * 0.05 }}
+                style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 13,
+                  fontWeight: 400,
+                  color: hovered ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.35)',
+                  padding: '5px 13px',
+                  border: `1px solid ${hovered ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)'}`,
+                  borderRadius: 2,
+                  transition: 'color 0.3s, border-color 0.3s',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {skill}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+      )}
+    </motion.div>
+  )
+}
+
+const Skills = () => {
+  const isMobile = useIsMobile()
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.04 })
+
+  return (
+    <section
+      id="skills"
+      ref={ref}
+      style={{
+        background: '#000',
+        position: 'relative',
+        overflow: 'hidden',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        padding: `clamp(80px, 11vw, 120px) 0 clamp(60px, 8vw, 100px)`,
+      }}
+    >
+      {/* Grain */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")`,
+        backgroundSize: '200px 200px',
+      }} />
+
+      {/* Ghost BG — premium gradient fill */}
+      <motion.span
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: 'absolute', top: '0%', right: '-2%',
+          fontFamily: 'Space Grotesk, sans-serif',
+          fontSize: isMobile ? '45vw' : '28vw',
+          fontWeight: 800,
+          letterSpacing: '-0.05em',
+          lineHeight: 0.85,
+          userSelect: 'none',
+          pointerEvents: 'none',
+          zIndex: 0,
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.01) 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
+        Skills
+      </motion.span>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+
+        {/* Meta + Heading */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+          gap: isMobile ? 20 : 0,
+          alignItems: 'flex-end',
+          marginBottom: isMobile ? 40 : 64,
+        }}>
+          <div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}
+            >
+              <div style={{ width: 20, height: 1, background: 'rgba(255,255,255,0.3)' }} />
+              <span className="label" style={{ color: 'rgba(255,255,255,0.4)', letterSpacing: '0.2em' }}>
+                02 — Technical Skills
+              </span>
+            </motion.div>
+            <div style={{ overflow: 'hidden' }}>
+              <motion.h2
+                initial={{ y: '105%' }}
+                animate={inView ? { y: '0%' } : {}}
+                transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontSize: isMobile ? 'clamp(2.5rem, 12vw, 4rem)' : 'clamp(3rem, 6vw, 6rem)',
+                  fontWeight: 700,
+                  letterSpacing: '-0.035em',
+                  color: '#fff',
+                  lineHeight: 0.9,
+                  margin: 0,
+                }}
+              >
+                My Stack
+              </motion.h2>
+            </div>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 14,
+              lineHeight: 1.75,
+              color: 'rgba(255,255,255,0.35)',
+              maxWidth: 380,
+              marginLeft: isMobile ? 0 : 'auto',
+            }}
+          >
+            Technologies I use to build scalable, production-ready
+            software — from polished UIs to robust server-side systems.
+          </motion.p>
         </div>
 
-        {/* Skill rows */}
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
-        >
-          {current.skills.map((skill, i) => (
-            <SkillRow key={skill.name} skill={skill} inView={inView} delay={i * 0.06} isMobile={isMobile} />
+        {/* Rows */}
+        <div style={{ paddingLeft: isMobile ? 0 : 32 }}>
+          {categories.map((cat, i) => (
+            <CategoryRow key={cat.num} cat={cat} index={i} inView={inView} isMobile={isMobile} />
           ))}
-        </motion.div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={inView ? { scaleX: 1 } : {}}
+            transition={{ duration: 1, delay: 0.9 }}
+            style={{ transformOrigin: 'left', height: 1, background: 'rgba(255,255,255,0.07)' }}
+          />
+        </div>
 
         {/* Concepts */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid rgba(255,255,255,0.06)' }}
+          transition={{ duration: 0.7, delay: 1.0 }}
+          style={{
+            marginTop: isMobile ? 48 : 64,
+            paddingTop: isMobile ? 28 : 36,
+            borderTop: '1px solid rgba(255,255,255,0.07)',
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : '200px 1fr',
+            gap: isMobile ? 14 : 40,
+            alignItems: 'start',
+          }}
         >
-          <p className="label" style={{ marginBottom: 16 }}>Concepts & Practices</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {[
-              'OOP', 'Microservices Architecture', 'JWT Authentication',
-              'Role-Based Access Control', 'RAG Pipeline', 'Data Structures & Algorithms',
-              'DBMS', 'Operating Systems', 'REST API Design',
-            ].map(c => <span key={c} className="tag">{c}</span>)}
-          </div>
+          <p className="label" style={{ color: 'rgba(255,255,255,0.22)', letterSpacing: '0.18em', paddingTop: 2 }}>
+            Concepts & Practices
+          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: isMobile ? 14 : 15,
+              color: 'rgba(255,255,255,0.38)',
+              lineHeight: 1.9,
+              letterSpacing: '0.01em',
+              fontWeight: 400,
+            }}
+          >
+            {concepts.join('  ·  ')}
+          </motion.p>
         </motion.div>
+
       </div>
     </section>
   )
