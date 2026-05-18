@@ -72,7 +72,7 @@ const Contact = () => {
           {/* Left — Info */}
           <motion.div {...fadeUp(0.15)} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
             {[
-              { label: 'Email', value: '2400032976cseelge@gmail.com', href: 'mailto:2400032976cseelge@gmail.com' },
+              { label: 'Email', value: 'saimokshith2006@gmail.com', href: 'mailto:saimokshith2006@gmail.com' },
               { label: 'Phone', value: '+91 9347804324', href: null },
               { label: 'Location', value: 'India', href: null },
               { label: 'LinkedIn', value: 'linkedin.com/in/medam-sai-mokshith', href: 'https://www.linkedin.com/in/medam-sai-mokshith-a03a8333b/' },

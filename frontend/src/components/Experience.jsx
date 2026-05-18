@@ -32,6 +32,19 @@ const education = [
     ],
     stack: ['Mathematics', 'Physics', 'Chemistry'],
   },
+  {
+    period: '2021 — 2022',
+    role: 'Secondary School Certificate (SSC) — 84%',
+    company: 'Narayana EM School',
+    type: 'Secondary School Education (10th)',
+    location: 'Andhra Pradesh',
+    description: 'Completed Secondary School Certificate (SSC / 10th Grade) at Narayana EM School with a percentage of 84%, building a solid academic foundation across core subjects.',
+    achievements: [
+      'Scored 84% in SSC board examinations',
+      'Strong foundation in core subjects — Mathematics, Science, and English',
+    ],
+    stack: ['Mathematics', 'Science', 'Social Studies', 'English', 'Telugu'],
+  },
 ]
 
 const ExperienceRow = ({ item, index, inView, isLast, isMobile }) => {

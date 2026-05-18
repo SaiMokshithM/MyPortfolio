@@ -87,12 +87,12 @@ const Hero = () => {
               <p className="label" style={{ marginBottom: 10 }}>My Contacts</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 <a
-                  href="mailto:2400032976cseelge@gmail.com"
+                  href="mailto:saimokshith2006@gmail.com"
                   style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
                   onMouseEnter={e => e.target.style.color = '#fff'}
                   onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.5)'}
                 >
-                  2400032976cseelge@gmail.com
+                  saimokshith2006@gmail.com
                 </a>
                 <a
                   href="https://www.linkedin.com/in/medam-sai-mokshith-a03a8333b/"
