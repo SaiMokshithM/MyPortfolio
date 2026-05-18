@@ -12,12 +12,22 @@ const CursorEffect = () => {
   const [isClick, setIsClick] = useState(false)
 
   useEffect(() => {
+    // ── TOUCH DEVICE GUARD ──────────────────────────────────────
+    // Never activate the cursor effect on touch/mobile devices.
+    // cursor:none on touch breaks the entire interaction model.
+    const isTouch =
+      window.matchMedia('(hover: none)').matches ||
+      window.matchMedia('(pointer: coarse)').matches ||
+      'ontouchstart' in window
+    if (isTouch) return
+    // ────────────────────────────────────────────────────────────
+
     const dot = dotRef.current
     const ring = ringRef.current
     const trail = trailRef.current
     let animId
 
-    // Hide default cursor
+    // Hide default cursor (desktop only — mobile scoped in CSS)
     document.documentElement.style.cursor = 'none'
 
     const onMouseMove = (e) => {
@@ -85,6 +95,15 @@ const CursorEffect = () => {
       observer.disconnect()
     }
   }, [])
+
+  // Don't render cursor DOM on touch devices
+  const isTouchDevice =
+    typeof window !== 'undefined' &&
+    (window.matchMedia('(hover: none)').matches ||
+      window.matchMedia('(pointer: coarse)').matches ||
+      'ontouchstart' in window)
+
+  if (isTouchDevice) return null
 
   return (
     <>

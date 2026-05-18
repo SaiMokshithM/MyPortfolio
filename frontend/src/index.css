@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 
+/* ── DESIGN TOKENS ───────────────────────────────────────────── */
 :root {
   --black: #000000;
   --off-black: #0a0a0a;
@@ -14,15 +15,26 @@
   --gray: #888888;
   --gray-light: #aaaaaa;
   --accent: #ffffff;
+
+  /* Fluid spacing tokens */
+  --section-pad: clamp(56px, 8vw, 100px);
+  --container-pad: clamp(20px, 5vw, 40px);
+  --nav-height: 64px;
 }
 
+/* ── RESET ───────────────────────────────────────────────────── */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; cursor: none; }
+html {
+  scroll-behavior: smooth;
+  /* Prevent font inflation on iOS */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -32,21 +44,41 @@ body {
   line-height: 1.5;
   font-size: 14px;
   letter-spacing: 0.01em;
-  cursor: none;
 }
 
-a, button, [role="button"] { cursor: none !important; }
+/* ── CUSTOM CURSOR — fine pointer (desktop) only ─────────────── */
+/* This is the KEY fix: cursor:none must NOT apply on touch devices */
+@media (hover: hover) and (pointer: fine) {
+  html { cursor: none; }
+  body { cursor: none; }
+  a, button, [role="button"] { cursor: none !important; }
+}
 
+/* ── TOUCH DEVICE IMPROVEMENTS ──────────────────────────────── */
+/* Remove tap flash highlight on all interactive elements */
+button, a, [role="button"], input, textarea, select {
+  -webkit-tap-highlight-color: transparent;
+  /* Prevent double-tap zoom on buttons */
+  touch-action: manipulation;
+}
+
+/* Restore pointer cursor explicitly on touch */
+@media (hover: none), (pointer: coarse) {
+  html, body { cursor: auto; }
+  a, button, [role="button"] { cursor: pointer !important; }
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #0a0a0a; }
 ::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
 
 ::selection { background: rgba(255,255,255,0.15); color: #fff; }
 
-/* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+/* ── TYPOGRAPHY — fluid with clamp() ────────────────────────── */
 .display-xl {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(4rem, 12vw, 11rem);
+  font-size: clamp(3rem, 12vw, 11rem);
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.03em;
@@ -55,7 +87,7 @@ a, button, [role="button"] { cursor: none !important; }
 
 .display-lg {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(2.25rem, 8vw, 7rem);
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.03em;
@@ -63,14 +95,14 @@ a, button, [role="button"] { cursor: none !important; }
 
 .display-md {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(1.5rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
 }
 
 .label {
-  font-size: 10px;
+  font-size: clamp(9px, 2vw, 10px);
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -78,7 +110,7 @@ a, button, [role="button"] { cursor: none !important; }
 }
 
 .body-text {
-  font-size: 14px;
+  font-size: clamp(13px, 2vw, 14px);
   line-height: 1.7;
   color: var(--gray-light);
   font-weight: 400;
@@ -88,13 +120,14 @@ a, button, [role="button"] { cursor: none !important; }
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--container-pad);
 }
 
 .section {
-  padding: 100px 0;
+  padding: var(--section-pad) 0;
   border-top: 1px solid var(--border-subtle);
   position: relative;
+  will-change: transform, opacity;
 }
 
 /* ── LINES & DIVIDERS ─────────────────────────────────────────── */
@@ -109,13 +142,14 @@ a, button, [role="button"] { cursor: none !important; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 60px;
+  margin-bottom: 48px;
 }
 
 /* ── BUTTONS ─────────────────────────────────────────────────── */
 .btn-outline {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 13px 28px;
   border: 1px solid rgba(255,255,255,0.25);
@@ -129,16 +163,24 @@ a, button, [role="button"] { cursor: none !important; }
   cursor: pointer;
   background: transparent;
   transition: all 0.25s ease;
+  /* WCAG AA minimum touch target */
+  min-height: 44px;
+  white-space: nowrap;
 }
 .btn-outline:hover {
   background: var(--white);
   color: var(--black);
   border-color: var(--white);
 }
+.btn-outline:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
 
 .btn-solid {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 14px 32px;
   background: var(--white);
@@ -152,10 +194,17 @@ a, button, [role="button"] { cursor: none !important; }
   text-decoration: none;
   cursor: pointer;
   transition: all 0.25s ease;
+  /* WCAG AA minimum touch target */
+  min-height: 44px;
+  white-space: nowrap;
 }
 .btn-solid:hover {
   background: transparent;
   color: var(--white);
+}
+.btn-solid:active {
+  opacity: 0.8;
+  transform: scale(0.98);
 }
 
 /* ── TAG ────────────────────────────────────────────────────── */
@@ -186,19 +235,55 @@ a, button, [role="button"] { cursor: none !important; }
   border: none;
   border-bottom: 1px solid rgba(255,255,255,0.2);
   color: var(--white);
-  font-size: 14px;
+  /* 16px is critical: prevents iOS auto-zoom on input focus */
+  font-size: 16px;
   font-family: 'Inter', sans-serif;
   outline: none;
   transition: border-color 0.25s ease;
+  /* Remove iOS default styling */
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
 }
 .input-field::placeholder { color: rgba(255,255,255,0.25); }
 .input-field:focus { border-bottom-color: var(--white); }
 
-/* ── RESPONSIVE ──────────────────────────────────────────────── */
+/* ── RESPONSIVE — Tablet (≤768px) ───────────────────────────── */
 @media (max-width: 768px) {
-  .container { padding: 0 20px; }
-  .section { padding: 70px 0; }
-  .section-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+  :root {
+    --container-pad: 20px;
+    --section-pad: 68px;
+  }
+  .section-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 32px;
+  }
+}
+
+/* ── RESPONSIVE — Mobile (≤480px) ───────────────────────────── */
+@media (max-width: 480px) {
+  :root {
+    --container-pad: 16px;
+    --section-pad: 52px;
+  }
+  .section-meta {
+    margin-bottom: 24px;
+  }
+  .btn-outline,
+  .btn-solid {
+    padding: 12px 20px;
+    font-size: 12px;
+  }
+}
+
+/* ── SAFE AREA — iPhone notch / Dynamic Island ───────────────── */
+@supports (padding: env(safe-area-inset-left)) {
+  .container {
+    padding-left: max(var(--container-pad), env(safe-area-inset-left));
+    padding-right: max(var(--container-pad), env(safe-area-inset-right));
+  }
 }
 
 /* ── ANIMATIONS ──────────────────────────────────────────────── */
@@ -207,18 +292,6 @@ a, button, [role="button"] { cursor: none !important; }
   to   { transform: rotate(360deg); }
 }
 
-/* ── PREMIUM SCROLL EFFECTS ─────────────────────────────────── */
-html {
-  scroll-behavior: smooth;
-  cursor: none;
-}
-
-/* Optimize animated elements */
-.section {
-  will-change: transform, opacity;
-}
-
-/* Clip-path reveal for headings */
 @keyframes revealUp {
   from {
     clip-path: inset(100% 0 0 0);
@@ -232,7 +305,7 @@ html {
   }
 }
 
-/* Glowing line separator */
+/* ── GLOWING DIVIDER ─────────────────────────────────────────── */
 .glow-line {
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
@@ -244,7 +317,7 @@ html {
   50%       { opacity: 1; }
 }
 
-/* Scroll snap for full-page feel on desktop */
+/* ── DESKTOP HOVER EFFECT ────────────────────────────────────── */
 @media (min-width: 1024px) {
   .section:hover {
     transition: background 0.4s ease;
@@ -252,3 +325,20 @@ html {
   }
 }
 
+/* ── ACCESSIBILITY ───────────────────────────────────────────── */
+/* Keyboard focus ring — visible only for keyboard nav */
+:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.5);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}

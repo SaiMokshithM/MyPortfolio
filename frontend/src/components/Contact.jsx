@@ -79,24 +79,37 @@ const Contact = () => {
               { label: 'GitHub', value: 'github.com/SaiMokshithM', href: 'https://github.com/SaiMokshithM/' },
             ].map((info) => (
               <div key={info.label} style={{
-                display: 'grid', gridTemplateColumns: '120px 1fr',
-                padding: '18px 0',
+                display: 'grid',
+                gridTemplateColumns: isMobile ? '80px 1fr' : '120px 1fr',
+                padding: isMobile ? '14px 0' : '18px 0',
                 borderBottom: '1px solid rgba(255,255,255,0.06)',
-                gap: 20, alignItems: 'center',
+                gap: isMobile ? 12 : 20,
+                alignItems: 'start',
               }}>
-                <span className="label" style={{ color: 'rgba(255,255,255,0.3)' }}>{info.label}</span>
+                <span className="label" style={{ color: 'rgba(255,255,255,0.3)', paddingTop: 2 }}>{info.label}</span>
                 {info.href ? (
                   <a href={info.href}
                     target={info.href.startsWith('http') ? '_blank' : undefined}
                     rel="noopener noreferrer"
-                    style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', textDecoration: 'none', fontWeight: 400 }}
+                    style={{
+                      fontSize: isMobile ? 13 : 14,
+                      color: 'rgba(255,255,255,0.75)',
+                      textDecoration: 'none',
+                      fontWeight: 400,
+                      wordBreak: 'break-all',
+                      overflowWrap: 'anywhere',
+                    }}
                     onMouseEnter={e => e.target.style.color = '#fff'}
                     onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.75)'}
                   >
                     {info.value}
                   </a>
                 ) : (
-                  <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>{info.value}</span>
+                  <span style={{
+                    fontSize: isMobile ? 13 : 14,
+                    color: 'rgba(255,255,255,0.75)',
+                    wordBreak: 'break-word',
+                  }}>{info.value}</span>
                 )}
               </div>
             ))}

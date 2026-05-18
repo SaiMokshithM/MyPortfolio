@@ -52,7 +52,7 @@ const Footer = () => {
           {/* Navigation */}
           <div>
             <p className="label" style={{ marginBottom: 20 }}>Navigation</p>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 4 }}>
               {navLinks.map(link => (
                 <li key={link.label}>
                   <button
@@ -60,8 +60,12 @@ const Footer = () => {
                     style={{
                       background: 'none', border: 'none', cursor: 'pointer',
                       fontSize: 14, color: 'rgba(255,255,255,0.4)',
-                      fontFamily: 'Inter, sans-serif', padding: 0,
+                      fontFamily: 'Inter, sans-serif',
+                      padding: '10px 0',
+                      minHeight: 44,
+                      display: 'flex', alignItems: 'center',
                       transition: 'color 0.2s',
+                      width: '100%', textAlign: 'left',
                     }}
                     onMouseEnter={e => e.target.style.color = '#fff'}
                     onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.4)'}
@@ -76,7 +80,7 @@ const Footer = () => {
           {/* Socials */}
           <div>
             <p className="label" style={{ marginBottom: 20 }}>Connect</p>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 4 }}>
               {socials.map(s => (
                 <li key={s.label}>
                   <a
@@ -88,6 +92,8 @@ const Footer = () => {
                       textDecoration: 'none', display: 'flex',
                       alignItems: 'center', gap: 8,
                       transition: 'color 0.2s',
+                      padding: '10px 0',
+                      minHeight: 44,
                     }}
                     onMouseEnter={e => e.currentTarget.style.color = '#fff'}
                     onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
@@ -118,10 +124,11 @@ const Footer = () => {
               style={{
                 background: 'none', border: '1px solid rgba(255,255,255,0.12)',
                 borderRadius: 2, cursor: 'pointer', color: 'rgba(255,255,255,0.4)',
-                width: 36, height: 36,
+                width: 44, height: 44,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 14, transition: 'all 0.2s',
+                fontSize: 16, transition: 'all 0.2s',
                 fontFamily: 'Inter, sans-serif',
+                flexShrink: 0,
               }}
               onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)' }}
               onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)' }}

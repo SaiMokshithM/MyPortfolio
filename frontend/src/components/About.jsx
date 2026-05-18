@@ -150,7 +150,7 @@ const About = () => {
               ))}
             </div>
 
-            <div style={{ marginTop: 40, display: 'flex', gap: 12 }}>
+            <div style={{ marginTop: 40, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="btn-solid"
@@ -187,7 +187,7 @@ const About = () => {
               paddingLeft: (!isMobile && i > 0) || (isMobile && i % 2 !== 0) ? (isMobile ? 24 : 40) : 0,
             }}>
               <div style={{
-                fontSize: 48,
+                fontSize: 'clamp(2rem, 9vw, 3rem)',
                 fontWeight: 700,
                 fontFamily: 'Space Grotesk, sans-serif',
                 letterSpacing: '-0.03em',

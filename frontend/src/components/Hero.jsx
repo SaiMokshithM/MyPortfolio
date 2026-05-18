@@ -127,10 +127,13 @@ const Hero = () => {
       >
         <div style={{
           maxWidth: 1280, margin: '0 auto',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          flexWrap: 'wrap', gap: 16,
+          display: 'flex',
+          alignItems: isMobile ? 'flex-start' : 'center',
+          justifyContent: 'space-between',
+          flexDirection: isMobile ? 'column' : 'row',
+          gap: isMobile ? 16 : 20,
         }}>
-          <div style={{ display: 'flex', gap: 12 }}>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             <button
               onClick={() => scrollTo('projects')}
               className="btn-solid"
@@ -146,11 +149,13 @@ const Hero = () => {
               Contact Me
             </button>
           </div>
-          <div style={{ display: 'flex', gap: 32 }}>
-            {['React.js', 'Node.js', 'MongoDB', 'Express.js'].map(tech => (
-              <span key={tech} className="label" style={{ color: 'rgba(255,255,255,0.2)' }}>{tech}</span>
-            ))}
-          </div>
+          {!isMobile && (
+            <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+              {['React.js', 'Node.js', 'MongoDB', 'Express.js'].map(tech => (
+                <span key={tech} className="label" style={{ color: 'rgba(255,255,255,0.2)' }}>{tech}</span>
+              ))}
+            </div>
+          )}
         </div>
       </motion.div>
 

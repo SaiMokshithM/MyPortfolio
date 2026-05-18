@@ -98,11 +98,21 @@ const ExperienceRow = ({ item, index, inView, isLast, isMobile }) => {
           </p>
         </div>
         <div style={{ paddingTop: 4 }}>
-          <span style={{
-            fontSize: 20, color: 'rgba(255,255,255,0.3)', display: 'block',
-            transition: 'transform 0.3s ease',
-            transform: expanded ? 'rotate(45deg)' : 'none',
-          }}>+</span>
+          <span
+            style={{
+              fontSize: 20,
+              color: 'rgba(255,255,255,0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 44,
+              height: 44,
+              marginRight: -12,
+              transition: 'transform 0.3s ease',
+              transform: expanded ? 'rotate(45deg)' : 'none',
+              flexShrink: 0,
+            }}
+          >+</span>
         </div>
       </div>
 
