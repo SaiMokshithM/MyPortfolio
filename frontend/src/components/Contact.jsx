@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import axios from 'axios'
+import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
 import useIsMobile from '../hooks/useIsMobile'
 
@@ -32,13 +32,19 @@ const Contact = () => {
     const errs = validate()
     if (Object.keys(errs).length) { setErrors(errs); return }
     setSending(true)
-    try { await axios.post('/api/contact', form) } catch {}
-    finally {
-      setSending(false)
+    try {
+      const { error } = await supabase
+        .from('contacts')
+        .insert([{ name: form.name, email: form.email, message: form.message }])
+      if (error) throw error
       setSent(true)
       setForm({ name: '', email: '', message: '' })
       toast.success('Message sent.')
       setTimeout(() => setSent(false), 5000)
+    } catch (err) {
+      toast.error('Something went wrong. Please try again.')
+    } finally {
+      setSending(false)
     }
   }
 

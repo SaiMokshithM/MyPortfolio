@@ -401,6 +401,38 @@ button, a, [role="button"], input, textarea, select {
   }
 }
 
+/* ── WIPE-IN (clip-path from bottom) ─────────────────────────── */
+@keyframes wipeInUp {
+  from { clip-path: inset(0 0 100% 0); opacity: 0; }
+  to   { clip-path: inset(0 0 0% 0);   opacity: 1; }
+}
+
+/* ── SCALE + FADE IN ─────────────────────────────────────────── */
+@keyframes scaleFadeIn {
+  from { transform: scale(0.94) translateY(24px); opacity: 0; }
+  to   { transform: scale(1)    translateY(0);    opacity: 1; }
+}
+
+/* ── HORIZONTAL SCAN LINE ────────────────────────────────────── */
+@keyframes scanLine {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200vw); }
+}
+
+.scan-line-container {
+  position: relative;
+  overflow: hidden;
+}
+.scan-line-container::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  animation: scanLine 4s linear infinite;
+  pointer-events: none;
+}
+
 /* ── GLOWING DIVIDER ─────────────────────────────────────────── */
 .glow-line {
   height: 1px;
@@ -408,9 +440,35 @@ button, a, [role="button"], input, textarea, select {
   animation: glowPulse 3s ease-in-out infinite;
 }
 
+/* ── BREATHING GLOW ──────────────────────────────────────────── */
+@keyframes breatheGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1);    }
+  50%       { opacity: 0.8; transform: scale(1.04); }
+}
+
 @keyframes glowPulse {
   0%, 100% { opacity: 0.3; }
   50%       { opacity: 1; }
+}
+
+/* ── STAGGER UTILITIES ───────────────────────────────────────── */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: scaleFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.stagger-item:nth-child(1) { animation-delay: 0.05s; }
+.stagger-item:nth-child(2) { animation-delay: 0.12s; }
+.stagger-item:nth-child(3) { animation-delay: 0.19s; }
+.stagger-item:nth-child(4) { animation-delay: 0.26s; }
+.stagger-item:nth-child(5) { animation-delay: 0.33s; }
+.stagger-item:nth-child(6) { animation-delay: 0.40s; }
+
+/* ── SECTION TRANSITION OVERLAP ──────────────────────────────── */
+.section-overlap {
+  position: relative;
+  z-index: 1;
+  margin-top: -2px; /* Prevent hairline gap between sections */
 }
 
 /* ── DESKTOP HOVER EFFECT ────────────────────────────────────── */
@@ -422,7 +480,6 @@ button, a, [role="button"], input, textarea, select {
 }
 
 /* ── ACCESSIBILITY ───────────────────────────────────────────── */
-/* Keyboard focus ring — visible only for keyboard nav */
 :focus-visible {
   outline: 2px solid rgba(255,255,255,0.5);
   outline-offset: 3px;

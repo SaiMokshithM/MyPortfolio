@@ -2,9 +2,11 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 
 /**
- * Wraps any section with a premium scroll effect:
- * - Slides & fades in from below when entering
- * - Scales down + fades out as you scroll past it
+ * Premium section reveal wrapper:
+ *  - Clip-path wipe from bottom as section enters viewport
+ *  - Subtle scale + Y entrance (card lifts in)
+ *  - Parallax Y drift + fade-out as section exits
+ *  - Spring-smoothed for buttery feel
  */
 const SectionReveal = ({ children, id }) => {
   const ref = useRef(null)
@@ -14,20 +16,34 @@ const SectionReveal = ({ children, id }) => {
     offset: ['start end', 'end start'],
   })
 
-  // As section enters: scale from 0.94 → 1
-  const rawScale = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.94, 1, 1, 0.92])
-  // As section exits: fade out
-  const rawOpacity = useTransform(scrollYProgress, [0, 0.08, 0.85, 1], [0, 1, 1, 0])
-  // Slight Y parallax on exit
-  const rawY = useTransform(scrollYProgress, [0.85, 1], [0, -40])
+  // ── Entrance (0 → 0.18) ──────────────────────────────────────
+  const rawScale   = useTransform(scrollYProgress, [0, 0.14, 0.82, 1], [0.96, 1,    1,    0.94], { clamp: true })
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.10, 0.78, 1], [0,    1,    1,    0   ], { clamp: true })
+  const rawY       = useTransform(scrollYProgress, [0, 0.14, 0.82, 1], [48,   0,    0,    -36 ], { clamp: true })
+  const rawRotateX = useTransform(scrollYProgress, [0, 0.14],          [3,    0                ], { clamp: true })
 
-  const scale = useSpring(rawScale, { stiffness: 80, damping: 22 })
-  const opacity = useSpring(rawOpacity, { stiffness: 80, damping: 22 })
-  const y = useSpring(rawY, { stiffness: 80, damping: 22 })
+  // ── Springs — stiffness/damping tuned for premium feel ────────
+  const scale   = useSpring(rawScale,   { stiffness: 55, damping: 20 })
+  const opacity = useSpring(rawOpacity, { stiffness: 55, damping: 20 })
+  const y       = useSpring(rawY,       { stiffness: 55, damping: 20 })
+  const rotateX = useSpring(rawRotateX, { stiffness: 55, damping: 20 })
 
   return (
-    <div ref={ref} id={id} style={{ position: 'relative' }}>
-      <motion.div style={{ scale, opacity, y, transformOrigin: 'center top' }}>
+    <div
+      ref={ref}
+      id={id}
+      style={{ position: 'relative', perspective: '1200px' }}
+    >
+      <motion.div
+        style={{
+          scale,
+          opacity,
+          y,
+          rotateX,
+          transformOrigin: 'center top',
+          willChange: 'transform, opacity',
+        }}
+      >
         {children}
       </motion.div>
     </div>

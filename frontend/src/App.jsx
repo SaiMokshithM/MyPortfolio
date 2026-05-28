@@ -14,14 +14,19 @@ import Footer from './components/Footer'
 import CursorEffect from './components/CursorEffect'
 import SmoothScroll from './components/SmoothScroll'
 import SectionReveal from './components/SectionReveal'
+import ScrollProgressBar from './components/ScrollProgressBar'
 
 function App() {
   return (
     <Router>
       <div style={{ background: '#000', minHeight: '100vh', color: '#fff' }}>
-        {/* Premium smooth scroll engine */}
+
+        {/* ── Global scroll engine ── */}
         <SmoothScroll />
         <CursorEffect />
+
+        {/* ── Glowing scroll progress bar at top ── */}
+        <ScrollProgressBar />
 
         <Toaster
           position="top-right"
@@ -39,10 +44,10 @@ function App() {
         <Navbar />
 
         <main>
-          {/* Hero has its own parallax — no wrapper needed */}
+          {/* Hero has its own parallax — no SectionReveal wrapper */}
           <Hero />
 
-          {/* Every other section gets the premium reveal + exit effect */}
+          {/* Every section gets the premium 3D reveal + parallax exit */}
           <SectionReveal><About /></SectionReveal>
           <StatsBar />
           <SectionReveal><Skills /></SectionReveal>

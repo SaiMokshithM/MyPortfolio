@@ -57,10 +57,16 @@ const CursorEffect = () => {
 
     const onMouseEnterLink = (e) => {
       setIsHover(true)
-      const tag = e.target.tagName.toLowerCase()
-      if (tag === 'a') setLabel('open')
-      else if (tag === 'button') setLabel('click')
-      else setLabel('')
+      const currentEl = e.currentTarget
+      const customLabel = currentEl ? currentEl.getAttribute('data-cursor-label') : null
+      if (customLabel) {
+        setLabel(customLabel)
+      } else {
+        const tag = currentEl ? currentEl.tagName.toLowerCase() : ''
+        if (tag === 'a') setLabel('open')
+        else if (tag === 'button') setLabel('click')
+        else setLabel('')
+      }
     }
 
     const onMouseLeaveLink = () => {

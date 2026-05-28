@@ -1,38 +1,99 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useIsMobile from '../hooks/useIsMobile'
 
-const categories = [
+/* ─── Skill data with CDN icon URLs ──────────────────────────────────────── */
+const skills = [
   {
-    num: '01',
-    label: 'Frontend',
-    headline: 'What users see & interact with',
-    skills: ['React.js', 'JavaScript ES6+', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite', 'Framer Motion'],
+    name: 'HTML5',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+    color: '#E34F26',
   },
   {
-    num: '02',
-    label: 'Backend',
-    headline: 'The engine powering the product',
-    skills: ['Spring Boot', 'Node.js', 'Express.js', 'RESTful APIs', 'Spring Security', 'Hibernate ORM'],
+    name: 'CSS3',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+    color: '#1572B6',
   },
   {
-    num: '03',
-    label: 'Database',
-    headline: 'Where structured truth lives',
-    skills: ['MySQL', 'MongoDB', 'Spring Data JPA', 'ChromaDB'],
+    name: 'JavaScript',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+    color: '#F7DF1E',
   },
   {
-    num: '04',
-    label: 'Languages',
-    headline: 'How I communicate with machines',
-    skills: ['Java', 'JavaScript', 'Python', 'SQL', 'C'],
+    name: 'React.js',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    color: '#61DAFB',
   },
   {
-    num: '05',
-    label: 'Tools & DevOps',
-    headline: 'The craft, sharpened daily',
-    skills: ['Git / GitHub', 'Postman', 'Maven', 'Swagger', 'IntelliJ IDEA', 'n8n'],
+    name: 'Tailwind',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+    color: '#38BDF8',
+  },
+  {
+    name: 'Java',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+    color: '#F89820',
+  },
+  {
+    name: 'Spring Boot',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg',
+    color: '#6DB33F',
+  },
+  {
+    name: 'Node.js',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    color: '#68A063',
+  },
+  {
+    name: 'Express',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+    color: '#ffffff',
+  },
+  {
+    name: 'Python',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    color: '#3776AB',
+  },
+  {
+    name: 'MySQL',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+    color: '#4479A1',
+  },
+  {
+    name: 'MongoDB',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+    color: '#47A248',
+  },
+  {
+    name: 'Git',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    color: '#F05032',
+  },
+  {
+    name: 'GitHub',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    color: '#ffffff',
+  },
+  {
+    name: 'Postman',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg',
+    color: '#FF6C37',
+  },
+  {
+    name: 'IntelliJ',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg',
+    color: '#FE315D',
+  },
+  {
+    name: 'Vite',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg',
+    color: '#646CFF',
+  },
+  {
+    name: 'Framer',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framermotion/framermotion-original.svg',
+    color: '#BB4BFF',
   },
 ]
 
@@ -41,152 +102,101 @@ const concepts = [
   'RAG Pipeline', 'REST Design', 'MVC', 'DSA', 'DBMS',
 ]
 
-const CategoryRow = ({ cat, index, inView, isMobile }) => {
+/* ─── Single skill card ───────────────────────────────────────────────────── */
+const SkillCard = ({ skill, index, inView }) => {
   const [hovered, setHovered] = useState(false)
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: 0.3 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 32, scale: 0.9 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.55,
+        delay: 0.2 + index * 0.055,
+        ease: [0.16, 1, 0.3, 1],
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        position: 'relative',
-        borderTop: '1px solid rgba(255,255,255,0.07)',
-        padding: isMobile ? '28px 0' : '36px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 14,
+        padding: '28px 16px 22px',
+        borderRadius: 4,
+        border: `1px solid ${hovered ? `${skill.color}40` : 'rgba(255,255,255,0.07)'}`,
+        background: hovered
+          ? `radial-gradient(ellipse at 50% 0%, ${skill.color}14 0%, rgba(0,0,0,0.6) 70%)`
+          : 'rgba(255,255,255,0.025)',
+        backdropFilter: 'blur(8px)',
         cursor: 'default',
-        transition: 'background 0.3s',
-        background: hovered ? 'rgba(255,255,255,0.02)' : 'transparent',
+        transition: 'border-color 0.35s, background 0.35s, box-shadow 0.35s, transform 0.3s',
+        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+        boxShadow: hovered ? `0 8px 32px ${skill.color}22, 0 0 0 1px ${skill.color}18` : 'none',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      {/* Left accent line on hover */}
+      {/* Subtle top glow bar */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: '10%', right: '10%',
+        height: 1,
+        background: hovered
+          ? `linear-gradient(90deg, transparent, ${skill.color}80, transparent)`
+          : 'transparent',
+        transition: 'background 0.35s',
+        borderRadius: 999,
+      }} />
+
+      {/* Icon */}
       <motion.div
-        animate={{ scaleY: hovered ? 1 : 0 }}
-        transition={{ duration: 0.25 }}
+        animate={{ scale: hovered ? 1.12 : 1 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position: 'absolute',
-          left: -32,
-          top: 0, bottom: 0,
-          width: 1,
-          background: '#fff',
-          transformOrigin: 'top',
-        }}
-      />
-
-      {isMobile ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 14 }}>
-            <span style={{
-              fontFamily: 'Inter, sans-serif', fontSize: 10,
-              color: 'rgba(255,255,255,0.2)', letterSpacing: '0.12em',
-            }}>{cat.num}</span>
-            <div>
-              <p style={{
-                fontFamily: 'Space Grotesk, sans-serif', fontSize: 22,
-                fontWeight: 700, letterSpacing: '-0.025em',
-                color: '#fff', marginBottom: 4,
-              }}>{cat.label}</p>
-              <p style={{
-                fontFamily: 'Inter, sans-serif', fontSize: 12,
-                color: 'rgba(255,255,255,0.28)', fontStyle: 'italic',
-              }}>{cat.headline}</p>
-            </div>
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 10px' }}>
-            {cat.skills.map(skill => (
-              <span key={skill} style={{
-                fontFamily: 'Inter, sans-serif', fontSize: 12,
-                color: 'rgba(255,255,255,0.6)',
-                padding: '5px 12px',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: 2,
-              }}>{skill}</span>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '64px 260px 1fr',
+          width: 52,
+          height: 52,
+          display: 'flex',
           alignItems: 'center',
-          gap: 0,
-        }}>
-          {/* Number */}
-          <motion.span
-            animate={{ opacity: hovered ? 1 : 0.15 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontSize: 38,
-              fontWeight: 800,
-              color: '#fff',
-              letterSpacing: '-0.04em',
-              lineHeight: 1,
-            }}
-          >
-            {cat.num}
-          </motion.span>
+          justifyContent: 'center',
+          filter: hovered ? 'drop-shadow(0 0 10px ' + skill.color + '88)' : 'none',
+          transition: 'filter 0.35s',
+        }}
+      >
+        <img
+          src={skill.icon}
+          alt={skill.name}
+          width={52}
+          height={52}
+          style={{
+            objectFit: 'contain',
+            opacity: hovered ? 1 : 0.75,
+            transition: 'opacity 0.3s',
+          }}
+          onError={e => { e.target.style.display = 'none' }}
+        />
+      </motion.div>
 
-          {/* Category + headline */}
-          <motion.div
-            animate={{ x: hovered ? 8 : 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            style={{ paddingRight: 40 }}
-          >
-            <p style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontSize: 'clamp(1.3rem, 2.5vw, 2rem)',
-              fontWeight: 700,
-              letterSpacing: '-0.025em',
-              color: hovered ? '#fff' : 'rgba(255,255,255,0.85)',
-              lineHeight: 1.1,
-              marginBottom: 6,
-              transition: 'color 0.3s',
-            }}>{cat.label}</p>
-            <p style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 12,
-              color: 'rgba(255,255,255,0.28)',
-              fontStyle: 'italic',
-            }}>{cat.headline}</p>
-          </motion.div>
-
-          {/* Skills — left-aligned, wrap naturally */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '8px 10px',
-            alignItems: 'center',
-          }}>
-            {cat.skills.map((skill, i) => (
-              <motion.span
-                key={skill}
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 + i * 0.05 }}
-                style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 13,
-                  fontWeight: 400,
-                  color: hovered ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.35)',
-                  padding: '5px 13px',
-                  border: `1px solid ${hovered ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)'}`,
-                  borderRadius: 2,
-                  transition: 'color 0.3s, border-color 0.3s',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {skill}
-              </motion.span>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Label */}
+      <span style={{
+        fontFamily: 'Inter, sans-serif',
+        fontSize: 11,
+        fontWeight: 500,
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+        color: hovered ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.35)',
+        transition: 'color 0.3s',
+        textAlign: 'center',
+        lineHeight: 1.2,
+      }}>
+        {skill.name}
+      </span>
     </motion.div>
   )
 }
 
+/* ─── Main Skills section ─────────────────────────────────────────────────── */
 const Skills = () => {
   const isMobile = useIsMobile()
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.04 })
@@ -203,14 +213,14 @@ const Skills = () => {
         padding: `clamp(80px, 11vw, 120px) 0 clamp(60px, 8vw, 100px)`,
       }}
     >
-      {/* Grain */}
+      {/* Noise grain */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")`,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E")`,
         backgroundSize: '200px 200px',
       }} />
 
-      {/* Ghost BG — premium gradient fill */}
+      {/* Ghost BG text */}
       <motion.span
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -225,7 +235,7 @@ const Skills = () => {
           userSelect: 'none',
           pointerEvents: 'none',
           zIndex: 0,
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.01) 100%)',
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 40%, rgba(255,255,255,0.005) 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
@@ -236,13 +246,13 @@ const Skills = () => {
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-        {/* Meta + Heading */}
+        {/* ── Header ── */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
           gap: isMobile ? 20 : 0,
           alignItems: 'flex-end',
-          marginBottom: isMobile ? 40 : 64,
+          marginBottom: isMobile ? 48 : 72,
         }}>
           <div>
             <motion.div
@@ -294,26 +304,26 @@ const Skills = () => {
           </motion.p>
         </div>
 
-        {/* Rows */}
-        <div style={{ paddingLeft: isMobile ? 0 : 32 }}>
-          {categories.map((cat, i) => (
-            <CategoryRow key={cat.num} cat={cat} index={i} inView={inView} isMobile={isMobile} />
+        {/* ── Icon Grid ── */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile
+            ? 'repeat(3, 1fr)'
+            : 'repeat(6, 1fr)',
+          gap: isMobile ? 10 : 14,
+          marginBottom: isMobile ? 48 : 64,
+        }}>
+          {skills.map((skill, i) => (
+            <SkillCard key={skill.name} skill={skill} index={i} inView={inView} />
           ))}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1, delay: 0.9 }}
-            style={{ transformOrigin: 'left', height: 1, background: 'rgba(255,255,255,0.07)' }}
-          />
         </div>
 
-        {/* Concepts */}
+        {/* ── Concepts strip ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 1.0 }}
+          transition={{ duration: 0.7, delay: 1.1 }}
           style={{
-            marginTop: isMobile ? 48 : 64,
             paddingTop: isMobile ? 28 : 36,
             borderTop: '1px solid rgba(255,255,255,0.07)',
             display: 'grid',
@@ -323,12 +333,12 @@ const Skills = () => {
           }}
         >
           <p className="label" style={{ color: 'rgba(255,255,255,0.22)', letterSpacing: '0.18em', paddingTop: 2 }}>
-            Concepts & Practices
+            Concepts &amp; Practices
           </p>
           <motion.p
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 1.1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
             style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: isMobile ? 14 : 15,
