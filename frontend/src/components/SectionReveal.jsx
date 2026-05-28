@@ -1,35 +1,15 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 /**
  * Premium section reveal wrapper:
  *  - Subtle scale + Y entrance (card lifts in)
  *  - Spring-smoothed for buttery feel
- *  - NO exit animation — sections stay fully visible when scrolling back up
+ *  - Animates on entrance once, and stays fully visible
+ *  - 100% robust: immune to scroll-linking and race conditions
  */
 const SectionReveal = ({ children, id }) => {
-  const ref = useRef(null)
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-
-  // ── Entrance only — no exit fade (prevents black screen on reverse scroll)
-  const rawScale   = useTransform(scrollYProgress, [0, 0.14], [0.96, 1], { clamp: true })
-  const rawOpacity = useTransform(scrollYProgress, [0, 0.10], [0,    1], { clamp: true })
-  const rawY       = useTransform(scrollYProgress, [0, 0.14], [48,   0], { clamp: true })
-  const rawRotateX = useTransform(scrollYProgress, [0, 0.14], [3,    0], { clamp: true })
-
-  // ── Springs — stiffness/damping tuned for premium feel ────────
-  const scale   = useSpring(rawScale,   { stiffness: 55, damping: 20 })
-  const opacity = useSpring(rawOpacity, { stiffness: 55, damping: 20 })
-  const y       = useSpring(rawY,       { stiffness: 55, damping: 20 })
-  const rotateX = useSpring(rawRotateX, { stiffness: 55, damping: 20 })
-
   return (
     <div
-      ref={ref}
       id={id}
       style={{
         position: 'relative',
@@ -43,11 +23,16 @@ const SectionReveal = ({ children, id }) => {
       }}
     >
       <motion.div
+        initial={{ opacity: 0, y: 48, scale: 0.96, rotateX: 3 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+        viewport={{ once: true, margin: "-8% 0px -8% 0px" }}
+        transition={{
+          type: 'spring',
+          stiffness: 45,
+          damping: 18,
+          mass: 1
+        }}
         style={{
-          scale,
-          opacity,
-          y,
-          rotateX,
           transformOrigin: 'center top',
           willChange: 'transform, opacity',
           /* Restore font for children */
