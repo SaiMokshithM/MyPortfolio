@@ -53,19 +53,18 @@ const CinematicScroll = () => {
           {
             opacity: 0,
             scale: 0.97,
-            filter: 'blur(8px)',
+            filter: 'blur(6px)',
           },
           {
             opacity: 1,
             scale: 1,
             filter: 'blur(0px)',
-            duration: 1.2,
+            duration: 1.0,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 88%',
-              end: 'top 40%',
-              scrub: 1.5,
+              start: 'top 90%',
+              toggleActions: 'play none none none',  // play once, never reverse
             },
           }
         )
@@ -242,24 +241,7 @@ const CinematicScroll = () => {
         )
       })
 
-      /* ── 9. SCALE SPOTLIGHT — exit scale down + blur ────────── */
-      if (!isMobile) {
-        sections.forEach((section) => {
-          if (section.id === 'home') return
-          gsap.to(section, {
-            scale: 0.96,
-            filter: 'blur(3px)',
-            opacity: 0.6,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: section,
-              start: 'bottom 20%',
-              end: 'bottom top',
-              scrub: 1.5,
-            },
-          })
-        })
-      }
+      /* ── 9. SCALE SPOTLIGHT — removed to prevent black screen on reverse scroll ── */
 
       /* ── 10. STICKY NUMBER counters animate on enter ─────────── */
       document.querySelectorAll('[data-count]').forEach((el) => {

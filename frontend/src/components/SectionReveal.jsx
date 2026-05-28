@@ -3,10 +3,9 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 
 /**
  * Premium section reveal wrapper:
- *  - Clip-path wipe from bottom as section enters viewport
  *  - Subtle scale + Y entrance (card lifts in)
- *  - Parallax Y drift + fade-out as section exits
  *  - Spring-smoothed for buttery feel
+ *  - NO exit animation — sections stay fully visible when scrolling back up
  */
 const SectionReveal = ({ children, id }) => {
   const ref = useRef(null)
@@ -16,11 +15,11 @@ const SectionReveal = ({ children, id }) => {
     offset: ['start end', 'end start'],
   })
 
-  // ── Entrance (0 → 0.18) ──────────────────────────────────────
-  const rawScale   = useTransform(scrollYProgress, [0, 0.14, 0.82, 1], [0.96, 1,    1,    0.94], { clamp: true })
-  const rawOpacity = useTransform(scrollYProgress, [0, 0.10, 0.78, 1], [0,    1,    1,    0   ], { clamp: true })
-  const rawY       = useTransform(scrollYProgress, [0, 0.14, 0.82, 1], [48,   0,    0,    -36 ], { clamp: true })
-  const rawRotateX = useTransform(scrollYProgress, [0, 0.14],          [3,    0                ], { clamp: true })
+  // ── Entrance only — no exit fade (prevents black screen on reverse scroll)
+  const rawScale   = useTransform(scrollYProgress, [0, 0.14], [0.96, 1], { clamp: true })
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.10], [0,    1], { clamp: true })
+  const rawY       = useTransform(scrollYProgress, [0, 0.14], [48,   0], { clamp: true })
+  const rawRotateX = useTransform(scrollYProgress, [0, 0.14], [3,    0], { clamp: true })
 
   // ── Springs — stiffness/damping tuned for premium feel ────────
   const scale   = useSpring(rawScale,   { stiffness: 55, damping: 20 })
