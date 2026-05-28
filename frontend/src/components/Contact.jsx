@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { supabase } from '../lib/supabase'
@@ -41,7 +41,7 @@ const Contact = () => {
       setForm({ name: '', email: '', message: '' })
       toast.success('Message sent.')
       setTimeout(() => setSent(false), 5000)
-    } catch (err) {
+    } catch {
       toast.error('Something went wrong. Please try again.')
     } finally {
       setSending(false)
@@ -91,7 +91,15 @@ const Contact = () => {
         background: 'radial-gradient(ellipse at 60% 40%, rgba(255,255,255,0.015) 0%, transparent 70%)',
       }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 1, padding: `clamp(80px,11vw,120px) clamp(20px,6vw,80px)` }}>
+      <div className="container" style={{
+        position: 'relative',
+        zIndex: 1,
+        padding: isMobile
+          ? '60px 20px 60px'
+          : `clamp(80px,11vw,120px) clamp(20px,6vw,80px)`,
+        boxSizing: 'border-box',
+        width: '100%',
+      }}>
 
         {/* ── Section label ── */}
         <motion.div

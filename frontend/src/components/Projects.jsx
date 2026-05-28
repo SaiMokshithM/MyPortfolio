@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
@@ -496,8 +496,6 @@ const ProjectDrawer = ({ project, onClose }) => {
             onClick={onClose}
             role="button"
             style={{
-              background: 'transparent',
-              border: 'none',
               width: 36, height: 36,
               borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -1154,160 +1152,6 @@ const SplitShowcaseItem = ({ project, index, inView, onOpenCaseStudy }) => {
   )
 }
 
-/* ─── Interactive Grid Card Item ─────────────────────────────── */
-const GridShowcaseCard = ({ project, index, inView, onOpenCaseStudy }) => {
-  const [hovered, setHovered] = useState(false)
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: 0.1 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'relative',
-        background: hovered ? '#0c0c0c' : '#070707',
-        border: `1px solid ${hovered ? project.accent + '40' : 'rgba(255,255,255,0.06)'}`,
-        borderRadius: 8,
-        overflow: 'hidden',
-        boxShadow: hovered
-          ? `0 20px 48px ${project.accent}10, 0 0 0 1px ${project.accent}12`
-          : '0 4px 20px rgba(0,0,0,0.6)',
-        transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
-        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      {/* Visual Screen Area inside card */}
-      <div style={{
-        position: 'relative',
-        overflow: 'hidden',
-        aspectRatio: '16/10',
-        background: '#040404',
-        borderBottom: `1px solid ${hovered ? project.accent + '25' : 'rgba(255,255,255,0.04)'}`,
-        transition: 'border-color 0.4s',
-      }}>
-        {project.previewImage ? (
-          <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-            <img
-              src={project.previewImage}
-              alt={project.title}
-              style={{
-                width: '100%', height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-                transition: 'transform 0.6s ease',
-                transform: hovered ? 'scale(1.04)' : 'scale(1)',
-                filter: hovered ? 'brightness(1.04)' : 'brightness(0.85)',
-              }}
-            />
-          </div>
-        ) : (
-          <GradientPreview accent={project.accent} title={project.title} hovered={hovered} />
-        )}
-
-        {/* Badges Overlay */}
-        <div style={{
-          position: 'absolute', top: 12, left: 12,
-          background: 'rgba(0,0,0,0.8)',
-          backdropFilter: 'blur(8px)',
-          border: `1px solid ${project.accent}30`,
-          borderRadius: 3,
-          padding: '3px 8px',
-          fontFamily: 'Inter, sans-serif',
-          fontSize: 8.5, fontWeight: 700,
-          letterSpacing: '0.12em', textTransform: 'uppercase',
-          color: project.accent,
-        }}>{project.category}</div>
-
-        <div style={{
-          position: 'absolute', top: 12, right: 12,
-          background: 'rgba(0,0,0,0.6)',
-          backdropFilter: 'blur(8px)',
-          borderRadius: 3,
-          padding: '3px 8px',
-          fontFamily: 'Inter, sans-serif',
-          fontSize: 8.5, color: 'rgba(255,255,255,0.4)',
-        }}>{project.year}</div>
-      </div>
-
-      {/* Card Content body */}
-      <div style={{
-        padding: '24px',
-        display: 'flex', flexDirection: 'column', gap: 14, flex: 1,
-      }}>
-        <div>
-          <h3 style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontSize: '18px',
-            fontWeight: 700, letterSpacing: '-0.02em',
-            color: '#fff', margin: '0 0 2px',
-          }}>{project.title}</h3>
-          <p style={{
-            fontFamily: 'Inter, sans-serif', fontSize: 10.5,
-            color: 'rgba(255,255,255,0.3)', fontStyle: 'italic',
-            margin: 0,
-          }}>{project.subtitle}</p>
-        </div>
-
-        <p style={{
-          fontFamily: 'Inter, sans-serif', fontSize: 12,
-          color: 'rgba(255,255,255,0.45)', lineHeight: 1.7,
-          margin: 0, flex: 1,
-        }}>{project.description}</p>
-
-        {/* Tech tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {project.tags.slice(0, 3).map(tag => (
-            <span key={tag} style={{
-              fontFamily: 'Inter, sans-serif', fontSize: 8.5,
-              color: 'rgba(255,255,255,0.3)',
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.05)',
-              padding: '2px 6px', borderRadius: 2,
-            }}>{tag}</span>
-          ))}
-        </div>
-
-        {/* Deep Dive Action */}
-        <button
-          onClick={() => onOpenCaseStudy(project)}
-          role="button"
-          style={{
-            width: '100%',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-            padding: '10px 16px',
-            background: hovered ? project.accent : 'rgba(255,255,255,0.02)',
-            border: `1px solid ${hovered ? project.accent : 'rgba(255,255,255,0.08)'}`,
-            borderRadius: 4,
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 10.5, fontWeight: 700,
-            letterSpacing: '0.06em', textTransform: 'uppercase',
-            color: hovered ? '#000' : project.accent,
-            cursor: 'none',
-            transition: 'all 0.3s ease',
-          }}
-        >
-          View Case Study
-        </button>
-      </div>
-
-      {/* Decorative Glow bottom border */}
-      <motion.div
-        animate={{ scaleX: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
-        style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0,
-          height: 2,
-          background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)`,
-          transformOrigin: 'center',
-        }}
-      />
-    </motion.div>
-  )
-}
 
 /* ─── Main Projects Showcase Component ──────────────────────── */
 const Projects = () => {
@@ -1439,7 +1283,6 @@ const Projects = () => {
               >{cat}</button>
             ))}
           </div>
-
 
         </motion.div>
 

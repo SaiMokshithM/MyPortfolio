@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-let lenisInstance = null
-
-export const getLenis = () => lenisInstance
+gsap.registerPlugin(ScrollTrigger)
 
 const SmoothScroll = () => {
   useEffect(() => {
@@ -23,20 +23,23 @@ const SmoothScroll = () => {
       syncTouch: false,        // Let native touch be native (better mobile UX)
     })
 
-    lenisInstance = lenis
+    // ── KEY BRIDGE: Sync Lenis scroll position with GSAP ScrollTrigger ──
+    // Without this, GSAP ScrollTrigger uses native scroll position which
+    // doesn't match Lenis's virtual scroll — causing animation jitter.
+    lenis.on('scroll', ScrollTrigger.update)
 
-    // Sync lenis scroll events with native scroll listeners (for react-intersection-observer)
+    // Also dispatch native scroll event for react-intersection-observer
     lenis.on('scroll', () => {
       window.dispatchEvent(new Event('scroll'))
     })
 
-    // RAF loop
-    let rafId
-    const raf = (time) => {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
-    rafId = requestAnimationFrame(raf)
+    // ── RAF loop — tick both Lenis and GSAP together ─────────────
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000)  // GSAP time is in seconds, Lenis expects ms
+    })
+
+    // Disable GSAP's lagSmoothing to keep scroll perfectly synced
+    gsap.ticker.lagSmoothing(0)
 
     // Anchor click handler — smooth-scroll to section IDs via Lenis
     const handleAnchorClick = (e) => {
@@ -50,9 +53,9 @@ const SmoothScroll = () => {
     document.addEventListener('click', handleAnchorClick)
 
     return () => {
-      cancelAnimationFrame(rafId)
+      // Remove GSAP ticker — critical to avoid double RAF loops
+      gsap.ticker.remove(lenis.raf)
       lenis.destroy()
-      lenisInstance = null
       document.removeEventListener('click', handleAnchorClick)
     }
   }, [])

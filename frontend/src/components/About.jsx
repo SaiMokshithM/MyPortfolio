@@ -1,4 +1,3 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useIsMobile from '../hooks/useIsMobile'
@@ -46,7 +45,7 @@ const About = () => {
       id="about"
       ref={ref}
       style={{
-        minHeight: '100vh',
+        minHeight: isMobile ? 'auto' : '100vh',
         background: '#000',
         position: 'relative',
         overflow: 'hidden',
@@ -104,9 +103,11 @@ const About = () => {
       <div style={{
         position: 'relative', zIndex: 2,
         padding: isMobile
-          ? 'clamp(100px,28vw,160px) 24px 120px'
+          ? '72px 20px 80px'
           : 'clamp(80px,16vw,140px) clamp(40px,8vw,100px) 120px',
         maxWidth: 800,
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
 
         {/* Section label */}

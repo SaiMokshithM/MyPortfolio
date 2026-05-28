@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import useIsMobile from '../hooks/useIsMobile'
@@ -120,7 +120,7 @@ const EducationRow = ({ item, index, inView, isMobile }) => {
               <span style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: 10,
-                color: 'rgba(255,255,255,0.28)',
+                color: 'rgba(255,255,255,0.5)',
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
               }}>{item.period}</span>
@@ -161,20 +161,20 @@ const EducationRow = ({ item, index, inView, isMobile }) => {
               <span style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: 12.5,
-                color: 'rgba(255,255,255,0.35)',
+                color: 'rgba(255,255,255,0.7)',
                 fontStyle: 'italic',
               }}>{item.honors}</span>
-              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)' }}>·</span>
+              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>·</span>
               <span style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: 12.5,
-                color: 'rgba(255,255,255,0.28)',
+                color: 'rgba(255,255,255,0.6)',
               }}>{item.company}</span>
-              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)' }}>·</span>
+              <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>·</span>
               <span style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: 11,
-                color: 'rgba(255,255,255,0.2)',
+                color: 'rgba(255,255,255,0.45)',
                 letterSpacing: '0.03em',
               }}>{item.location}</span>
               {item.gpa && (
@@ -248,11 +248,11 @@ const EducationRow = ({ item, index, inView, isMobile }) => {
                 <div>
                   <p style={{
                     fontFamily: 'Inter, sans-serif',
-                    fontSize: 13.5,
-                    lineHeight: 1.85,
-                    color: 'rgba(255,255,255,0.38)',
+                    fontSize: 14,
+                    lineHeight: 1.8,
+                    color: 'rgba(255,255,255,0.7)',
                     margin: '0 0 28px',
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}>
                     {item.description}
                   </p>
@@ -262,7 +262,7 @@ const EducationRow = ({ item, index, inView, isMobile }) => {
                     fontSize: 9,
                     letterSpacing: '0.2em',
                     textTransform: 'uppercase',
-                    color: 'rgba(255,255,255,0.22)',
+                    color: 'rgba(255,255,255,0.45)',
                     marginBottom: 16,
                   }}>Highlights</p>
 
@@ -278,10 +278,10 @@ const EducationRow = ({ item, index, inView, isMobile }) => {
                         }} />
                         <span style={{
                           fontFamily: 'Inter, sans-serif',
-                          fontSize: 12.5,
-                          color: 'rgba(255,255,255,0.45)',
+                          fontSize: 13,
+                          color: 'rgba(255,255,255,0.75)',
                           lineHeight: 1.7,
-                          fontWeight: 300,
+                          fontWeight: 400,
                         }}>{a}</span>
                       </div>
                     ))}
@@ -295,7 +295,7 @@ const EducationRow = ({ item, index, inView, isMobile }) => {
                     fontSize: 9,
                     letterSpacing: '0.2em',
                     textTransform: 'uppercase',
-                    color: 'rgba(255,255,255,0.22)',
+                    color: 'rgba(255,255,255,0.45)',
                     marginBottom: 16,
                   }}>Subjects & Focus</p>
 
@@ -306,9 +306,9 @@ const EducationRow = ({ item, index, inView, isMobile }) => {
                         fontSize: 9,
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
-                        color: i === 0 ? item.accent : 'rgba(255,255,255,0.32)',
+                        color: i === 0 ? item.accent : 'rgba(255,255,255,0.55)',
                         background: i === 0 ? `${item.accent}10` : 'rgba(255,255,255,0.02)',
-                        border: `1px solid ${i === 0 ? item.accent + '35' : 'rgba(255,255,255,0.07)'}`,
+                        border: `1px solid ${i === 0 ? item.accent + '35' : 'rgba(255,255,255,0.12)'}`,
                         padding: '6px 14px',
                         borderRadius: 2,
                         transition: 'all 0.3s ease',
@@ -350,20 +350,34 @@ const Experience = () => {
       }} />
 
       {/* Giant ghost background word */}
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 2.0 }}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position: 'absolute', top: '0%', right: '-4%',
-          fontFamily: 'Space Grotesk, sans-serif',
-          fontSize: isMobile ? '38vw' : '22vw',
-          fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 0.82,
-          userSelect: 'none', pointerEvents: 'none', zIndex: 0,
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 65%)',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+          position: 'absolute',
+          top: isMobile ? '4%' : '6%',
+          left: 0,
+          right: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          textAlign: 'center',
+          lineHeight: 0.85,
+          userSelect: 'none',
         }}
-      >EDU</motion.span>
+      >
+        <span style={{
+          fontFamily: 'Space Grotesk, sans-serif',
+          fontSize: isMobile ? '16vw' : '15vw',
+          fontWeight: 800,
+          letterSpacing: '-0.04em',
+          color: 'rgba(255,255,255,0.045)',
+          display: 'block',
+          whiteSpace: 'nowrap',
+        }}>
+          EDUCATION
+        </span>
+      </motion.div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 

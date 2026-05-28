@@ -32,7 +32,16 @@ const SectionReveal = ({ children, id }) => {
     <div
       ref={ref}
       id={id}
-      style={{ position: 'relative', perspective: '1200px' }}
+      style={{
+        position: 'relative',
+        perspective: '1200px',
+        /* Critical: zero out any browser default spacing */
+        margin: 0,
+        padding: 0,
+        /* Prevent gap lines from sub-pixel rounding on mobile */
+        fontSize: 0,
+        lineHeight: 0,
+      }}
     >
       <motion.div
         style={{
@@ -42,6 +51,9 @@ const SectionReveal = ({ children, id }) => {
           rotateX,
           transformOrigin: 'center top',
           willChange: 'transform, opacity',
+          /* Restore font for children */
+          fontSize: 'initial',
+          lineHeight: 'initial',
         }}
       >
         {children}

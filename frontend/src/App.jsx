@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Navbar from './components/Navbar'
@@ -15,14 +14,16 @@ import CursorEffect from './components/CursorEffect'
 import SmoothScroll from './components/SmoothScroll'
 import SectionReveal from './components/SectionReveal'
 import ScrollProgressBar from './components/ScrollProgressBar'
+import CinematicScroll from './components/CinematicScroll'
 
 function App() {
   return (
     <Router>
-      <div style={{ background: '#000', minHeight: '100vh', color: '#fff' }}>
+      <div style={{ background: '#000', minHeight: '100vh', color: '#fff', position: 'relative' }}>
 
         {/* ── Global scroll engine ── */}
         <SmoothScroll />
+        <CinematicScroll />
         <CursorEffect />
 
         {/* ── Glowing scroll progress bar at top ── */}

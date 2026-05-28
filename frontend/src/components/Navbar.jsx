@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
@@ -171,7 +171,7 @@ const Navbar = () => {
               }} />
               <span style={{
                 display: 'block', height: 1.5,
-                background: '#fff', width: '70%',
+                background: '#fff',
                 borderRadius: 2,
                 transition: 'opacity 0.2s, width 0.35s',
                 opacity: menuOpen ? 0 : 1,

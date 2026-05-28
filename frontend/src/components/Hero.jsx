@@ -1,4 +1,3 @@
-import React from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import useIsMobile from '../hooks/useIsMobile'
 
@@ -42,13 +41,15 @@ const Hero = () => {
     <section
       id="home"
       style={{
-        minHeight: '100vh',
+        minHeight: '100dvh',
         background: '#0a0a0a',
         paddingTop: 'var(--nav-height)',
         position: 'relative',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
+        marginBottom: 0,
+        paddingBottom: 0,
       }}
     >
       {/* ── Grain overlay ── */}
@@ -78,7 +79,7 @@ const Hero = () => {
           {/* ══ LEFT — TEXT ══ */}
           <div style={{
             padding: isMobile
-              ? '48px 24px 32px'
+              ? '32px 20px 24px'
               : 'clamp(40px,8vh,80px) clamp(32px,6vw,80px)',
             display: 'flex',
             flexDirection: 'column',
@@ -325,15 +326,27 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
-              style={{ height: 320, position: 'relative', overflow: 'hidden' }}
+              style={{
+                height: 300,
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'block',
+                flexShrink: 0,
+                lineHeight: 0,
+                fontSize: 0,
+              }}
             >
               <img
                 src="/sai.jpg"
                 alt="Mokshith"
                 style={{
-                  width: '100%', height: '100%',
-                  objectFit: 'cover', objectPosition: 'center top',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
                   filter: 'grayscale(100%) contrast(1.15) brightness(0.82)',
+                  display: 'block',
+                  verticalAlign: 'top',
                 }}
               />
               <div style={{
@@ -358,12 +371,13 @@ const Hero = () => {
         style={{
           position: isMobile ? 'relative' : 'absolute',
           bottom: 0, left: 0, right: 0,
-          padding: isMobile ? '16px 24px' : '18px clamp(32px,6vw,80px)',
+          padding: isMobile ? '14px 20px' : '18px clamp(32px,6vw,80px)',
           borderTop: '1px solid rgba(255,255,255,0.07)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           zIndex: 5,
+          marginTop: 0,
         }}
       >
 
